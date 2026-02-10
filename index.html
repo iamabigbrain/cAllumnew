@@ -2,73 +2,46 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>cAllumdev</title>
-
-  <!-- Your CSS -->
   <link rel="stylesheet" href="style.css" />
-
-  <!-- AOS (Animate On Scroll) CSS -->
-  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
 </head>
 <body>
 
   <!-- HERO SECTION -->
-  scroll-behavior: smooth;
-  <section class="hero section active">
-
-    <div class="hero-left" data-aos="fade-up">
-      <!-- If your image isn't showing, replace me.jpg with the placeholder URL below -->
-      <img src="me.jpg" alt="Photo of Callum">
-      <!-- <img src="https://via.placeholder.com/420x520" alt="placeholder"> -->
+  <section class="hero">
+    <div class="hero-left">
+      <img src="me.jpg" alt="Photo of Callum" />
     </div>
-
-    <div class="hero-right" data-aos="fade-up" data-aos-delay="150">
+    <div class="hero-right">
       <h1>cAllumdev</h1>
-      <p>Unity game developer</p>
-      <p>Video editor</p>
-      <p>C# scripter</p>
+      <p>Unity Game Developer</p>
+      <p>Video Editor</p>
     </div>
-
   </section>
 
-  <!-- ABOUT SECTION -->
-  <section class="about section">
+  <!-- ABOUT / WHAT I DO SECTION -->
+  <section class="about reveal">
     <h2>What I do</h2>
     <p>
-      I build games in Unity, edit videos, and love creating interactive
-      experiences that feel polished, smooth, and intentional.
+      I build Unity games, edit videos, and create interactive web experiences. I focus on clean, smooth, modern designs that feel polished and professional.
     </p>
   </section>
 
-  <!-- ================= SCRIPTS ================= -->
+  <!-- PROJECTS SECTION -->
+  <section class="projects reveal">
+    <h2>Projects</h2>
+    <div class="project">
+      <h3>My First Game</h3>
+      <p>Unity game with C# scripts and interactive mechanics.</p>
+    </div>
+    <div class="project">
+      <h3>Video Editing Reel</h3>
+      <p>Showcase of video projects and motion graphics work.</p>
+    </div>
+  </section>
 
-  <!-- Mouse pull effect -->
-  <script>
-    const image = document.querySelector(".hero-left img");
-
-    document.addEventListener("mousemove", (e) => {
-      if (!image) return;
-
-      const rect = image.getBoundingClientRect();
-      const imageX = rect.left + rect.width / 2;
-      const imageY = rect.top + rect.height / 2;
-
-      const offsetX = (e.clientX - imageX) * 0.01;
-      const offsetY = (e.clientY - imageY) * 0.01;
-
-      image.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
-    });
-  </script>
-
-  <!-- AOS JS -->
-  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-  <script>
-    AOS.init({
-      duration: 900,
-      easing: "ease-out-cubic",
-      once: true
-    });
-  </script>
-
+  <!-- SCRIPT -->
+  <script src="script.js"></script>
 </body>
 </html>
