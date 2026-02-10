@@ -4,9 +4,29 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Callum Dev</title>
+  
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+
+  <!-- GSAP -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
+  <!-- FIXED HEADER -->
+  <header>
+    <div class="logo">CDOT</div>
+    <nav>
+      <a href="#about">About Me</a>
+      <a href="#projects">Projects</a>
+      <a href="#timeline">Timeline</a>
+      <a href="#videos">Videos</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
 
   <!-- HERO SECTION -->
   <section class="hero">
@@ -22,13 +42,13 @@
   </section>
 
   <!-- WHO I AM -->
-  <section class="section about">
+  <section id="about" class="section about">
     <h2>Who I Am</h2>
     <p>Short intro about yourself.</p>
   </section>
 
   <!-- PROJECTS -->
-  <section class="section projects">
+  <section id="projects" class="section projects">
     <h2>Projects</h2>
     <div class="project">
       <h3>Project 1</h3>
@@ -40,26 +60,41 @@
     </div>
   </section>
 
-  <!-- TIMELINE (horizontal scroll) -->
-  <section class="section timeline">
+  <!-- TIMELINE -->
+  <section id="timeline" class="section timeline">
     <h2>Timeline</h2>
     <div class="timeline-track">
-      <div class="milestone">2019<br>Started Coding</div>
-      <div class="milestone">2020<br>First Game</div>
-      <div class="milestone">2021<br>Video Editing</div>
-      <div class="milestone">2022<br>Portfolio Launch</div>
-      <div class="milestone">2023<br>Projects & Growth</div>
+      <div class="milestone">
+        <img src="timeline1.jpg" alt="2019">
+        <p>2019 - Started Coding</p>
+      </div>
+      <div class="milestone">
+        <img src="timeline2.jpg" alt="2020">
+        <p>2020 - First Game</p>
+      </div>
+      <div class="milestone">
+        <img src="timeline3.jpg" alt="2021">
+        <p>2021 - Video Editing</p>
+      </div>
+      <div class="milestone">
+        <img src="timeline4.jpg" alt="2022">
+        <p>2022 - Portfolio Launch</p>
+      </div>
+      <div class="milestone">
+        <img src="timeline5.jpg" alt="2023">
+        <p>2023 - Projects & Growth</p>
+      </div>
     </div>
   </section>
 
   <!-- VIDEOS -->
-  <section class="section videos">
+  <section id="videos" class="section videos">
     <h2>Videos</h2>
     <p>Links or embeds of your video content.</p>
   </section>
 
   <!-- CONTACT -->
-  <section class="section contact">
+  <section id="contact" class="section contact">
     <h2>Contact</h2>
     <p>Email, socials, etc.</p>
   </section>
