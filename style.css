@@ -13,13 +13,34 @@ body {
 }
 
 /* HERO SECTION */
-.hero {
+.hero,
+.about {
+  position: sticky;
+  top: 0;
   min-height: 100vh;
+  padding: 0 10vw;
   display: flex;
   align-items: center;
-  padding: 0 10vw;
-  gap: 80px;
+  background: #0f0f0f;
 }
+
+.section {
+  opacity: 0;
+  transform: translateY(60px);
+  transition: opacity 1.2s ease, transform 1.2s ease;
+}
+
+.section.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.section.fade-out {
+  opacity: 0;
+  transform: translateY(-60px);
+}
+
+
 
 /* HERO COLUMNS */
 .hero-left,
@@ -48,15 +69,6 @@ body {
 }
 
 /* ABOUT SECTION */
-.about {
-  min-height: 100vh; /* THIS is what makes it feel like a new page */
-  padding: 160px 10vw;
-  max-width: 900px;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
 
 .about::before {
   content: "";
