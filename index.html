@@ -4,24 +4,39 @@
   <meta charset="UTF-8" />
   <title>cAllumdev</title>
   <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
 </head>
 <body>
 
   <section class="hero">
 
-    <div class="hero-left">
-      <!-- Replace me.jpg with your actual image filename -->
-      <img src="me.jpg" alt="Photo of Callum">
-    </div>
+  <div class="hero-left" data-aos="fade-up">
+    <img src="me.jpg" alt="Photo of Callum">
+  </div>
 
-    <div class="hero-right">
-      <h1>cAllumdev</h1>
-      <p>Unity game developer</p>
-      <p>Video editor</p>
-      <p>C# scripter</p>
-    </div>
+  <div class="hero-right" data-aos="fade-up" data-aos-delay="150">
+    <h1>cAllumdev</h1>
+    <p>Unity game developer</p>
+    <p>Video editor</p>
+    <p>C# scripter</p>
+  </div>
 
-  </section>
+    <section class="about" data-aos="fade-up">
+  <h2>What I do</h2>
+  <p>
+    I build games in Unity, edit videos, and love creating interactive
+    experiences that feel polished and intentional.
+  </p>
+</section>
+
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+  AOS.init({
+    duration: 900,
+    easing: "ease-out-cubic",
+    once: true
+  });
+</script>
 
   <!-- Mouse pull effect -->
   <script>
