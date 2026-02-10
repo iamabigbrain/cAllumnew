@@ -1,58 +1,48 @@
+/* Reset browser defaults */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+/* Page base */
 body {
   background: #0e0e0e;
   color: white;
-  font-family: system-ui, sans-serif;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
+/* Hero section */
 .hero {
-  min-height: 100vh;   /* makes hero fill the screen */
-  display: flex;        /* puts children side-by-side */
-  align-items: center;  /* vertically centers columns */
-  padding: 0 10vw;      /* side spacing */
-  gap: 80px;            /* space between columns */
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 0 10vw;
+  gap: 80px;
 }
 
+/* Columns */
 .hero-left,
 .hero-right {
-  flex: 1;              /* each takes 50% of width */
+  flex: 1;
 }
 
-<section class="hero">
+/* Image styling */
+.hero-left img {
+  width: 100%;
+  max-width: 420px;
+  border-radius: 20px;
+  transition: transform 0.2s ease-out;
+}
 
-  <div class="hero-left">
-    <img src="me.jpg" alt="Photo of Callum" />
-  </div>
-
-  <div class="hero-right">
-    <h1>cAllumdev</h1>
-    <p>Unity game developer</p>
-    <p>Video editor</p>
-    <p>Other skills...</p>
-  </div>
-
-</section>
-
+/* Text styling */
 .hero-right h1 {
-  font-size: clamp(48px, 7vw, 96px); /* scales with screen size */
+  font-size: clamp(48px, 7vw, 96px);
   margin-bottom: 24px;
 }
 
 .hero-right p {
   font-size: 20px;
-  opacity: 0.7;       /* lighter text for secondary roles */
+  opacity: 0.7;
   margin-bottom: 12px;
 }
-
-.hero-left img {
-  width: 100%;          /* responsive inside the column */
-  max-width: 400px;     /* controls size on big screens */
-  border-radius: 20px;  /* rounded corners = modern look */
-  transition: transform 0.2s ease-out; /* smooth animation for later */
-}
-
