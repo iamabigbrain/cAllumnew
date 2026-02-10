@@ -6,41 +6,28 @@ document.addEventListener("mousemove", e => {
   heroImage.style.transform = `translate(${x}px, ${y}px)`;
 });
 
-// ===== SMOOTH SCROLL AND SECTION FADE =====
-const container = document.querySelector(".scroll-container");
+// ===== SECTION FADE-IN ON SCROLL =====
 const sections = document.querySelectorAll(".section");
 const hero = document.querySelector(".hero");
 
-let scrollY = 0;
-let currentY = 0;
+function onScroll() {
+  const scrollY = window.scrollY;
+  const windowH = window.innerHeight;
 
-window.addEventListener("scroll", () => {
-  scrollY = window.scrollY;
-});
-
-function animate() {
-  // Smooth easing
-  currentY += (scrollY - currentY) * 0.1;
-  container.style.transform = `translateY(-${currentY}px)`;
-
-  // Hero fade out as we scroll
+  // Fade out hero
   const heroHeight = hero.offsetHeight;
-  let heroOpacity = 1 - currentY / heroHeight;
+  let heroOpacity = 1 - scrollY / (heroHeight * 0.7); // fade hero faster
   if(heroOpacity < 0) heroOpacity = 0;
   hero.style.opacity = heroOpacity;
 
   // Fade in sections
   sections.forEach(sec => {
-    const top = sec.offsetTop - currentY;
-    const windowH = window.innerHeight;
-    if(top < windowH * 0.8) {
+    const secTop = sec.offsetTop;
+    if(scrollY + windowH * 0.8 > secTop){
       sec.classList.add("active");
-    } else {
-      sec.classList.remove("active");
     }
   });
-
-  requestAnimationFrame(animate);
 }
 
-animate();
+window.addEventListener("scroll", onScroll);
+window.addEventListener("load", onScroll);
