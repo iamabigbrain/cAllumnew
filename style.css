@@ -9,14 +9,11 @@ body {
   font-family: Arial, Helvetica, sans-serif;
   background: #0f0f0f;
   color: #fff;
-  overflow: hidden; /* hide default scroll */
 }
 
 /* MAIN SCROLL CONTAINER */
 .scroll-container {
-  position: fixed;
-  top: 0;
-  left: 0;
+  position: relative; /* instead of fixed */
   width: 100%;
 }
 
