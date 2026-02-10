@@ -1,4 +1,4 @@
-// ===== HERO IMAGE MOUSE PULL =====
+// HERO IMAGE MOUSE PULL
 const heroImage = document.querySelector(".hero-left img");
 document.addEventListener("mousemove", e => {
   const x = (window.innerWidth / 2 - e.clientX) / 30;
@@ -6,37 +6,53 @@ document.addEventListener("mousemove", e => {
   heroImage.style.transform = `translate(${x}px, ${y}px)`;
 });
 
-// ===== SECTIONS FADE-IN =====
-const sections = document.querySelectorAll(".hero, .section");
-function animateSections() {
-  const scrollY = window.scrollY;
-  const windowH = window.innerHeight;
+// FADE-IN SECTIONS & HERO FADE
+gsap.registerPlugin(ScrollTrigger);
 
-  sections.forEach(sec => {
-    const secTop = sec.offsetTop;
-    if(scrollY + windowH * 0.8 > secTop){
-      sec.classList.add("active");
-    }
-  });
+// Hero fade out as you scroll
+gsap.to(".hero", {
+  scrollTrigger: {
+    trigger: ".hero",
+    start: "top top",
+    end: "bottom top",
+    scrub: true
+  },
+  opacity: 0
+});
 
-  // HERO fade out
-  const hero = document.querySelector(".hero");
-  const heroHeight = hero.offsetHeight;
-  let opacity = 1 - scrollY / (heroHeight * 0.7);
-  if(opacity < 0) opacity = 0;
-  hero.style.opacity = opacity;
+// Fade in sections
+gsap.utils.toArray(".section").forEach(section => {
+  gsap.fromTo(section,
+    {opacity: 0, y: 50},
+    {
+      opacity: 1,
+      y: 0,
+      scrollTrigger: {
+        trigger: section,
+        start: "top 80%",
+        end: "top 50%",
+        scrub: true
+      }
+    });
+});
 
-  // TIMELINE HORIZONTAL SCROLL
-  const timelineSection = document.querySelector(".timeline");
-  const timelineTrack = document.querySelector(".timeline-track");
-  const secTop = timelineSection.offsetTop;
-  const secHeight = timelineSection.offsetHeight;
-  if(scrollY >= secTop && scrollY <= secTop + secHeight){
-    const progress = (scrollY - secTop) / secHeight; // 0 → 1
-    const maxScroll = timelineTrack.scrollWidth - timelineSection.offsetWidth;
-    timelineTrack.style.transform = `translateX(-${progress * maxScroll}px)`;
+// TIMELINE HORIZONTAL SCROLL
+gsap.to(".timeline-track", {
+  x: () => -(document.querySelector(".timeline-track").scrollWidth - window.innerWidth + 40),
+  ease: "none",
+  scrollTrigger: {
+    trigger: ".timeline",
+    start: "top top",
+    end: "bottom top",
+    scrub: true
   }
-}
+});
 
-window.addEventListener("scroll", animateSections);
-window.addEventListener("load", animateSections);
+// SMOOTH SCROLL FOR MENU
+document.querySelectorAll("nav a").forEach(link => {
+  link.addEventListener("click", e => {
+    e.preventDefault();
+    const target = document.querySelector(link.getAttribute("href"));
+    target.scrollIntoView({behavior: "smooth"});
+  });
+});
