@@ -23,6 +23,8 @@ header {
   justify-content: space-between;
   padding: 20px 10vw;
   z-index: 100;
+  background: rgba(15,15,15,0.85);
+  backdrop-filter: blur(6px);
 }
 
 .logo {
@@ -88,6 +90,8 @@ nav a:hover {
   padding: 20px;
   background: rgba(255,255,255,0.05);
   border-radius: 12px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
 }
 
 /* TIMELINE */
@@ -100,15 +104,4 @@ nav a:hover {
   display: flex;
   gap: 50px;
   transition: transform 0.1s linear;
-}
-
-.milestone {
-  min-width: 220px;
-  text-align: center;
-}
-
-.milestone img {
-  width: 100%;
-  border-radius: 12px;
-  margin-bottom: 10px;
 }
