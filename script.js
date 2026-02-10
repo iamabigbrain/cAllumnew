@@ -37,17 +37,24 @@ gsap.utils.toArray(".section").forEach(section => {
 });
 
 // TIMELINE HORIZONTAL SCROLL WITH PIN LOCK
+const timelineTrack = document.querySelector(".timeline-track");
 const timelineSection = document.querySelector(".timeline");
 
-ScrollTrigger.create({
-  trigger: timelineSection,
-  start: "top top",
-  end: () => "+=" + (timelineSection.scrollWidth),
-  onEnter: () => document.body.style.overflowY = "hidden",
-  onLeave: () => document.body.style.overflowY = "auto",
-  onEnterBack: () => document.body.style.overflowY = "hidden",
-  onLeaveBack: () => document.body.style.overflowY = "auto",
+const timelineWidth = timelineTrack.scrollWidth - window.innerWidth + 40; // full horizontal length
+
+gsap.to(timelineTrack, {
+  x: -timelineWidth,
+  ease: "none",
+  scrollTrigger: {
+    trigger: timelineSection,
+    start: "top top",
+    end: () => "+=" + timelineWidth, // pin duration = horizontal width
+    scrub: true,
+    pin: true,              // locks the section vertically
+    anticipatePin: 1,
+  }
 });
+
 
 
 // TIMELINE MILESTONES POP-IN
