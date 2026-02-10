@@ -9,22 +9,17 @@ body {
   font-family: Arial, Helvetica, sans-serif;
   background: #0f0f0f;
   color: #fff;
+  line-height: 1.5;
+  scroll-behavior: smooth;
 }
 
-/* MAIN SCROLL CONTAINER */
-.scroll-container {
-  position: relative; /* instead of fixed */
-  width: 100%;
-}
-
-/* HERO SECTION */
+/* HERO */
 .hero {
   display: flex;
   align-items: center;
   justify-content: space-between;
   min-height: 100vh;
   padding: 0 10vw;
-  opacity: 1;
 }
 
 .hero-left, .hero-right {
