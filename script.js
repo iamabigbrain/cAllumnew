@@ -36,20 +36,22 @@ gsap.utils.toArray(".section").forEach(section => {
     });
 });
 
-// TIMELINE HORIZONTAL SCROLL WITH PIN
+// TIMELINE HORIZONTAL SCROLL WITH PIN LOCK
 const timelineTrack = document.querySelector(".timeline-track");
 const timelineSection = document.querySelector(".timeline");
 
+const timelineWidth = timelineTrack.scrollWidth - window.innerWidth + 40; // full horizontal length
+
 gsap.to(timelineTrack, {
-  x: () => -(timelineTrack.scrollWidth - window.innerWidth + 40),
+  x: -timelineWidth,
   ease: "none",
   scrollTrigger: {
     trigger: timelineSection,
     start: "top top",
-    end: () => "+=" + (timelineTrack.scrollWidth - window.innerWidth + 40),
+    end: () => "+=" + timelineWidth, // pin duration = horizontal width
     scrub: true,
-    pin: true,
-    anticipatePin: 1
+    pin: true,              // locks the section vertically
+    anticipatePin: 1,
   }
 });
 
