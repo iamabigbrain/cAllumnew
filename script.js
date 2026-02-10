@@ -1,4 +1,6 @@
+// --------------------------
 // HERO IMAGE MOUSE PULL
+// --------------------------
 const heroImage = document.querySelector(".hero-left img");
 document.addEventListener("mousemove", e => {
   const x = (window.innerWidth / 2 - e.clientX) / 30;
@@ -6,10 +8,14 @@ document.addEventListener("mousemove", e => {
   heroImage.style.transform = `translate(${x}px, ${y}px)`;
 });
 
-// FADE-IN SECTIONS & HERO FADE
+// --------------------------
+// GSAP REGISTER PLUGIN
+// --------------------------
 gsap.registerPlugin(ScrollTrigger);
 
-// Hero fade out as you scroll
+// --------------------------
+// HERO FADE OUT ON SCROLL
+// --------------------------
 gsap.to(".hero", {
   scrollTrigger: {
     trigger: ".hero",
@@ -20,7 +26,9 @@ gsap.to(".hero", {
   opacity: 0
 });
 
-// Fade in sections
+// --------------------------
+// FADE IN SECTIONS
+// --------------------------
 gsap.utils.toArray(".section").forEach(section => {
   gsap.fromTo(section,
     {opacity: 0, y: 50},
@@ -36,19 +44,61 @@ gsap.utils.toArray(".section").forEach(section => {
     });
 });
 
-// TIMELINE HORIZONTAL SCROLL
-gsap.to(".timeline-track", {
-  x: () => -(document.querySelector(".timeline-track").scrollWidth - window.innerWidth + 40),
+// --------------------------
+// TIMELINE HORIZONTAL SCROLL WITH PIN
+// --------------------------
+const timelineTrack = document.querySelector(".timeline-track");
+const timelineSection = document.querySelector(".timeline");
+
+// Pin the timeline and scroll horizontally
+gsap.to(timelineTrack, {
+  x: () => -(timelineTrack.scrollWidth - window.innerWidth + 40),
   ease: "none",
   scrollTrigger: {
-    trigger: ".timeline",
+    trigger: timelineSection,
     start: "top top",
-    end: "bottom top",
-    scrub: true
+    end: () => "+=" + (timelineTrack.scrollWidth - window.innerWidth + 40),
+    scrub: true,
+    pin: true,
+    anticipatePin: 1
   }
 });
 
-// SMOOTH SCROLL FOR MENU
+// --------------------------
+// TIMELINE MILESTONES POP-IN
+// --------------------------
+gsap.utils.toArray(".milestone").forEach((milestone, i) => {
+  gsap.from(milestone, {
+    scale: 0.8,
+    opacity: 0,
+    y: 30,
+    scrollTrigger: {
+      trigger: milestone,
+      containerAnimation: ScrollTrigger.getById(timelineTrack),
+      start: "left 80%",
+      end: "left 50%",
+      toggleActions: "play none none reverse",
+      scrub: true
+    },
+    delay: i * 0.1
+  });
+});
+
+// --------------------------
+// PROJECT CARDS MICROINTERACTIONS
+// --------------------------
+document.querySelectorAll(".project").forEach(card => {
+  card.addEventListener("mouseenter", () => {
+    gsap.to(card, {scale: 1.05, boxShadow: "0 15px 30px rgba(0,255,255,0.3)", duration: 0.3});
+  });
+  card.addEventListener("mouseleave", () => {
+    gsap.to(card, {scale: 1, boxShadow: "0 0 0 rgba(0,0,0,0)", duration: 0.3});
+  });
+});
+
+// --------------------------
+// SMOOTH SCROLL FOR MENU LINKS
+// --------------------------
 document.querySelectorAll("nav a").forEach(link => {
   link.addEventListener("click", e => {
     e.preventDefault();
