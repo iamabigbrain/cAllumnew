@@ -46,3 +46,20 @@ body {
   opacity: 0.7;
   margin-bottom: 12px;
 }
+
+.about {
+  padding: 160px 10vw;
+  max-width: 900px;
+}
+
+.about h2 {
+  font-size: 48px;
+  margin-bottom: 24px;
+}
+
+.about p {
+  font-size: 20px;
+  opacity: 0.75;
+  line-height: 1.6;
+}
+
