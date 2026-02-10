@@ -1,6 +1,4 @@
-// --------------------------
 // HERO IMAGE MOUSE PULL
-// --------------------------
 const heroImage = document.querySelector(".hero-left img");
 document.addEventListener("mousemove", e => {
   const x = (window.innerWidth / 2 - e.clientX) / 30;
@@ -8,14 +6,10 @@ document.addEventListener("mousemove", e => {
   heroImage.style.transform = `translate(${x}px, ${y}px)`;
 });
 
-// --------------------------
-// GSAP REGISTER PLUGIN
-// --------------------------
+// REGISTER GSAP PLUGIN
 gsap.registerPlugin(ScrollTrigger);
 
-// --------------------------
 // HERO FADE OUT ON SCROLL
-// --------------------------
 gsap.to(".hero", {
   scrollTrigger: {
     trigger: ".hero",
@@ -26,9 +20,7 @@ gsap.to(".hero", {
   opacity: 0
 });
 
-// --------------------------
 // FADE IN SECTIONS
-// --------------------------
 gsap.utils.toArray(".section").forEach(section => {
   gsap.fromTo(section,
     {opacity: 0, y: 50},
@@ -44,13 +36,10 @@ gsap.utils.toArray(".section").forEach(section => {
     });
 });
 
-// --------------------------
 // TIMELINE HORIZONTAL SCROLL WITH PIN
-// --------------------------
 const timelineTrack = document.querySelector(".timeline-track");
 const timelineSection = document.querySelector(".timeline");
 
-// Pin the timeline and scroll horizontally
 gsap.to(timelineTrack, {
   x: () => -(timelineTrack.scrollWidth - window.innerWidth + 40),
   ease: "none",
@@ -64,9 +53,7 @@ gsap.to(timelineTrack, {
   }
 });
 
-// --------------------------
 // TIMELINE MILESTONES POP-IN
-// --------------------------
 gsap.utils.toArray(".milestone").forEach((milestone, i) => {
   gsap.from(milestone, {
     scale: 0.8,
@@ -84,9 +71,7 @@ gsap.utils.toArray(".milestone").forEach((milestone, i) => {
   });
 });
 
-// --------------------------
-// PROJECT CARDS MICROINTERACTIONS
-// --------------------------
+// PROJECT CARDS HOVER MICROINTERACTIONS
 document.querySelectorAll(".project").forEach(card => {
   card.addEventListener("mouseenter", () => {
     gsap.to(card, {scale: 1.05, boxShadow: "0 15px 30px rgba(0,255,255,0.3)", duration: 0.3});
@@ -96,9 +81,7 @@ document.querySelectorAll(".project").forEach(card => {
   });
 });
 
-// --------------------------
-// SMOOTH SCROLL FOR MENU LINKS
-// --------------------------
+// SMOOTH SCROLL FOR NAV LINKS
 document.querySelectorAll("nav a").forEach(link => {
   link.addEventListener("click", e => {
     e.preventDefault();
