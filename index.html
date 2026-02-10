@@ -6,17 +6,40 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-<section class="hero">
 
-  <div class="hero-left">
-    LEFT SIDE
-  </div>
+  <section class="hero">
 
-  <div class="hero-right">
-    RIGHT SIDE
-  </div>
+    <div class="hero-left">
+      <!-- Replace me.jpg with your actual image filename -->
+      <img src="me.jpg" alt="Photo of Callum">
+    </div>
 
+    <div class="hero-right">
+      <h1>cAllumdev</h1>
+      <p>Unity game developer</p>
+      <p>Video editor</p>
+      <p>C# scripter</p>
+    </div>
+
+  </section>
+
+  <!-- Mouse pull effect -->
+  <script>
+    const image = document.querySelector(".hero-left img");
+
+    document.addEventListener("mousemove", (e) => {
+      if (!image) return;
+
+      const rect = image.getBoundingClientRect();
+      const imageX = rect.left + rect.width / 2;
+      const imageY = rect.top + rect.height / 2;
+
+      const offsetX = (e.clientX - imageX) * 0.01;
+      const offsetY = (e.clientY - imageY) * 0.01;
+
+      image.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
+    });
+  </script>
 
 </body>
 </html>
-
