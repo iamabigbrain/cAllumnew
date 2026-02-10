@@ -10,9 +10,10 @@ body {
   background: #0f0f0f;
   color: #fff;
   line-height: 1.5;
+  overflow-x: hidden;
 }
 
-/* HERO SECTION */
+/* HERO */
 .hero {
   display: flex;
   align-items: center;
@@ -53,7 +54,7 @@ body {
   transition: opacity 1s ease-out, transform 1s ease-out;
 }
 
-/* ACTIVE CLASS WHEN IN VIEW */
+/* ACTIVE CLASS WHEN SCROLLED INTO VIEW */
 .active {
   opacity: 1;
   transform: translateY(0);
@@ -65,4 +66,24 @@ body {
   padding: 20px;
   background: rgba(255,255,255,0.05);
   border-radius: 12px;
+}
+
+/* TIMELINE */
+.timeline {
+  overflow: hidden;
+  position: relative;
+}
+
+.timeline-track {
+  display: flex;
+  gap: 50px;
+  transition: transform 0.1s linear;
+}
+
+.milestone {
+  min-width: 200px;
+  padding: 20px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 12px;
+  text-align: center;
 }
