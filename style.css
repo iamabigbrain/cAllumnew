@@ -1,18 +1,18 @@
-/* Reset browser defaults */
+/* RESET */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* Page base */
+/* BASE PAGE STYLING */
 body {
   background: #0e0e0e;
   color: white;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
-/* Hero section */
+/* HERO SECTION */
 .hero {
   min-height: 100vh;
   display: flex;
@@ -21,13 +21,13 @@ body {
   gap: 80px;
 }
 
-/* Columns */
+/* HERO COLUMNS */
 .hero-left,
 .hero-right {
   flex: 1;
 }
 
-/* Image styling */
+/* IMAGE */
 .hero-left img {
   width: 100%;
   max-width: 420px;
@@ -35,7 +35,7 @@ body {
   transition: transform 0.2s ease-out;
 }
 
-/* Text styling */
+/* TEXT */
 .hero-right h1 {
   font-size: clamp(48px, 7vw, 96px);
   margin-bottom: 24px;
@@ -47,9 +47,23 @@ body {
   margin-bottom: 12px;
 }
 
+/* ABOUT SECTION */
 .about {
+  min-height: 100vh; /* THIS is what makes it feel like a new page */
   padding: 160px 10vw;
   max-width: 900px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.about::before {
+  content: "";
+  width: 60px;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.2);
+  margin-bottom: 40px;
 }
 
 .about h2 {
@@ -62,4 +76,3 @@ body {
   opacity: 0.75;
   line-height: 1.6;
 }
-
