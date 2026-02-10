@@ -1,21 +1,33 @@
-const sections = document.querySelectorAll(".section");
+// ===== HERO IMAGE MOUSE PULL =====
+const heroImage = document.querySelector(".hero-left img");
 
-window.addEventListener("scroll", () => {
-  const scrollPos = window.scrollY;
+if (heroImage) {
+  document.addEventListener("mousemove", (e) => {
+    const x = (window.innerWidth / 2 - e.clientX) / 30;
+    const y = (window.innerHeight / 2 - e.clientY) / 30;
+
+    heroImage.style.transform = `translate(${x}px, ${y}px)`;
+  });
+}
+
+// ===== SCROLL REVEAL =====
+const revealElements = document.querySelectorAll(".reveal");
+
+function revealOnScroll() {
   const windowHeight = window.innerHeight;
 
-  sections.forEach((section, index) => {
-    const start = index * windowHeight;
-    const end = start + windowHeight;
+  revealElements.forEach(el => {
+    const elementTop = el.getBoundingClientRect().top;
+    const triggerPoint = windowHeight * 0.8;
 
-    if (scrollPos >= start && scrollPos < end) {
-      section.classList.add("active");
-      section.classList.remove("fade-out");
-    } else if (scrollPos >= end) {
-      section.classList.remove("active");
-      section.classList.add("fade-out");
-    } else {
-      section.classList.remove("active", "fade-out");
+    if (elementTop < triggerPoint) {
+      el.classList.add("active");
     }
   });
-});
+}
+
+// Run on scroll
+window.addEventListener("scroll", revealOnScroll);
+
+// Run on page load
+window.addEventListener("load", revealOnScroll);
