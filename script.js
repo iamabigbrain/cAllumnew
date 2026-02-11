@@ -61,6 +61,34 @@ document.addEventListener("DOMContentLoaded", function () {
     opacity: 0
   });
 
+  // HERO IMAGE FADE IN
+gsap.from(".hero-left img", {
+  opacity: 0,
+  scale: 0.9,
+  duration: 1.2,
+  delay: 0.3,
+  ease: "power3.out"
+});
+
+  // HEADER ANIMATION
+gsap.from("header", {
+  y: -80,
+  opacity: 0,
+  duration: 1,
+  ease: "power3.out"
+});
+
+  header {
+  opacity: 0;
+}
+
+.hero-left img {
+  opacity: 0;
+}
+
+
+
+
 
   // ====================================
   // SECTION FADE IN ON SCROLL
