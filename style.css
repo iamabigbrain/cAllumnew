@@ -5,6 +5,10 @@
   box-sizing: border-box;
 }
 
+html {
+  scroll-padding-top: 100px; /* prevents header overlap */
+}
+
 body {
   font-family: 'Poppins', sans-serif;
   background: #0f0f0f;
@@ -41,7 +45,7 @@ nav a {
 }
 
 nav a:hover {
-  color: #ff2a2a; /* RED hover */
+  color: #ff2a2a;
 }
 
 /* HERO */
@@ -53,7 +57,8 @@ nav a:hover {
   padding: 0 10vw;
 }
 
-.hero-left, .hero-right {
+.hero-left,
+.hero-right {
   flex: 1;
 }
 
@@ -99,25 +104,20 @@ nav a:hover {
 /* TIMELINE */
 .timeline {
   display: flex;
-  flex-direction: column; 
+  flex-direction: column;
   align-items: center;
-  gap: 40px;
-  padding-top: 40px;
 }
 
 .timeline-track {
   display: flex;
-  flex-direction: column; 
+  flex-direction: column;
   gap: 40px;
-  width: 100%;
-  max-width: 500px; 
 }
 
+/* TIMELINE CARDS */
 .milestone {
-  width: 100%;
+  width: 80%;
   max-width: 400px;
-  text-align: center;
-  margin: 0 auto;
   padding: 30px;
   background: rgba(255,255,255,0.05);
   backdrop-filter: blur(10px);
@@ -141,6 +141,11 @@ nav a:hover {
 .milestone p {
   font-size: 14px;
   opacity: 0.8;
+}
+
+.milestone:hover {
+  box-shadow: 0 20px 40px rgba(255,0,0,0.4);
+  transform: scale(1.1);
 }
 
 /* CONTACT */
@@ -183,9 +188,8 @@ nav a:hover {
   box-shadow: 0 15px 35px rgba(255,0,0,0.5);
 }
 
-/* MOBILE RESPONSIVE */
+/* MOBILE */
 @media (max-width: 900px) {
-
   .hero {
     flex-direction: column;
     text-align: center;
@@ -207,9 +211,5 @@ nav a:hover {
 
   .section {
     padding: 100px 6vw;
-  }
-
-  .timeline-track {
-    gap: 20px;
   }
 }
