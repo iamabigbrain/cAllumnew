@@ -1,4 +1,6 @@
-/* RESET */
+/* ================================ */
+/* RESET & BASE STYLES               */
+/* ================================ */
 * {
   margin: 0;
   padding: 0;
@@ -13,7 +15,9 @@ body {
   overflow-x: hidden;
 }
 
-/* HEADER */
+/* ================================ */
+/* HEADER                            */
+/* ================================ */
 header {
   position: fixed;
   top: 0;
@@ -21,9 +25,10 @@ header {
   width: 100%;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   padding: 20px 10vw;
   z-index: 100;
-  background: rgba(15,15,15,0.85);
+  background: rgba(15, 15, 15, 0.85);
   backdrop-filter: blur(6px);
 }
 
@@ -41,10 +46,12 @@ nav a {
 }
 
 nav a:hover {
-  color: #ff2a2a; /* 🔥 RED instead of blue */
+  color: #ff0000; /* red highlight */
 }
 
-/* HERO */
+/* ================================ */
+/* HERO SECTION                      */
+/* ================================ */
 .hero {
   display: flex;
   align-items: center;
@@ -53,7 +60,7 @@ nav a:hover {
   padding: 0 10vw;
 }
 
-.hero-left, 
+.hero-left,
 .hero-right {
   flex: 1;
 }
@@ -61,8 +68,8 @@ nav a:hover {
 .hero-left img {
   width: 100%;
   max-width: 420px;
-  border-radius: 20px;
-  transition: transform 0.2s ease-out;
+  border-radius: 16px;
+  transition: transform 0.6s ease-out;
 }
 
 .hero-right h1 {
@@ -73,157 +80,112 @@ nav a:hover {
 
 .hero-right p {
   font-size: 20px;
-  color: rgba(255,255,255,0.7);
+  color: rgba(255, 255, 255, 0.7);
   margin-bottom: 12px;
 }
 
-/* SECTIONS */
+/* ================================ */
+/* SECTIONS                          */
+/* ================================ */
 .section {
   min-height: 80vh;
   padding: 120px 10vw;
-  opacity: 0;
+  opacity: 0;      /* start hidden, fade in with GSAP */
   transform: translateY(40px);
 }
 
-/* PROJECT CARDS */
+/* ================================ */
+/* PROJECT CARDS                     */
+/* ================================ */
 .project {
   margin-top: 20px;
-  padding: 30px;
-  background: rgba(255,255,255,0.05);
-  backdrop-filter: blur(10px);
-  border-radius: 20px;
-  border: 1px solid rgba(255,255,255,0.08);
-
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   cursor: pointer;
 }
 
-.project:hover {
-  box-shadow: 0 20px 40px rgba(255, 0, 0, 0.35);
-}
-
-/* TIMELINE */
+/* ================================ */
+/* TIMELINE                          */
+/* ================================ */
 .timeline {
-  overflow: hidden;
-  position: relative;
-  margin-top: 40px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  cursor: grab;
+  padding: 40px 10vw;
 }
 
 .timeline-track {
-  display: flex;
+  display: flex; /* horizontal desktop */
   gap: 50px;
-  transition: transform 0.3s ease;
+  transition: transform 0.1s linear;
 }
 
-/* TIMELINE CARDS (MATCH PROJECT STYLE) */
 .milestone {
-  min-width: 280px;
-  padding: 30px;
-
-  background: rgba(255,255,255,0.05);
-  backdrop-filter: blur(10px);
-  border-radius: 20px;
-  border: 1px solid rgba(255,255,255,0.08);
-
+  flex: none;
+  width: 200px;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  cursor: pointer;
 }
 
-.milestone img {
-  width: 100%;
-  border-radius: 15px;
-  margin-bottom: 15px;
-}
-
-.milestone h3 {
-  font-size: 20px;
-  margin-bottom: 10px;
-}
-
-.milestone p {
-  font-size: 14px;
-  opacity: 0.8;
-}
-
-.milestone:hover {
-  box-shadow: 0 20px 40px rgba(255, 0, 0, 0.4);
-}
-
-/* ============================= */
-/* CONTACT SECTION */
-/* ============================= */
-
-.contact-section {
-  text-align: center;
-}
-
-.contact-section h2 {
-  font-size: 40px;
-  margin-bottom: 40px;
-}
-
-.contact-content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 30px;
-}
-
-.promo-video {
-  width: 100%;
-  max-width: 600px;
-  border-radius: 20px;
-  box-shadow: 0 20px 50px rgba(255,0,0,0.3);
-}
-
-.contact-btn {
-  display: inline-block;
-  padding: 15px 40px;
-  background: #ff2a2a;
-  color: #fff;
-  font-weight: 700;
-  text-decoration: none;
-  border-radius: 40px;
-  transition: all 0.3s ease;
-}
-
-.contact-btn:hover {
-  transform: scale(1.08);
-  box-shadow: 0 15px 35px rgba(255,0,0,0.5);
-}
-
-/* ============================= */
-/* MOBILE RESPONSIVE */
-/* ============================= */
-
-@media (max-width: 900px) {
-
+/* ================================ */
+/* RESPONSIVE: MOBILE TIMELINE       */
+/* ================================ */
+@media (max-width: 768px) {
   .hero {
     flex-direction: column;
     text-align: center;
-    padding-top: 120px;
+    gap: 40px;
   }
 
-  .hero-left img {
-    max-width: 300px;
-    margin-bottom: 30px;
-  }
-
-  .hero-right h1 {
-    font-size: 42px;
-  }
-
-  nav {
-    display: none; /* hides nav on small screens for now */
-  }
-
-  .section {
-    padding: 100px 6vw;
+  .timeline {
+    overflow-x: hidden;
+    overflow-y: visible;
   }
 
   .timeline-track {
-    gap: 20px;
+    display: block; /* vertical stack */
   }
 
+  .milestone {
+    width: 100%;
+    margin-bottom: 30px;
+  }
 }
 
+/* ================================ */
+/* CONTACT SECTION                   */
+/* ================================ */
+.contact {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 20px;
+}
+
+.contact video {
+  max-width: 600px;
+  width: 100%;
+  border-radius: 12px;
+}
+
+.contact button {
+  padding: 12px 24px;
+  font-size: 18px;
+  font-weight: 600;
+  background: #ff0000;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.contact button:hover {
+  background: #cc0000;
+}
