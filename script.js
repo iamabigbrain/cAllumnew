@@ -7,6 +7,50 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
   // ====================================
+  // HEADER DROP + FADE IN
+  // ====================================
+  gsap.from("header", {
+    y: -80,
+    opacity: 0,
+    duration: 1,
+    ease: "power3.out"
+  });
+
+
+  // ====================================
+  // HERO IMAGE FADE IN
+  // ====================================
+  gsap.from(".hero-left img", {
+    opacity: 0,
+    scale: 0.9,
+    duration: 1.2,
+    delay: 0.3,
+    ease: "power3.out"
+  });
+
+
+  // ====================================
+  // HERO TEXT FADE IN (STAGGERED)
+  // ====================================
+  gsap.from(".hero-right h1", {
+    opacity: 0,
+    y: 40,
+    duration: 1,
+    delay: 0.5,
+    ease: "power3.out"
+  });
+
+  gsap.from(".fade-line", {
+    opacity: 0,
+    y: 30,
+    duration: 1,
+    stagger: 0.3,
+    delay: 0.8,
+    ease: "power3.out"
+  });
+
+
+  // ====================================
   // HERO IMAGE MOUSE PULL (TOWARDS MOUSE)
   // ====================================
   const heroImage = document.querySelector(".hero-left img");
@@ -26,26 +70,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     });
   }
-
-
-  // ====================================
-  // HERO TEXT FADE IN (STAGGERED)
-  // ====================================
-  gsap.from(".hero-right h1", {
-    opacity: 0,
-    y: 40,
-    duration: 1,
-    ease: "power3.out"
-  });
-
-  gsap.from(".fade-line", {
-    opacity: 0,
-    y: 30,
-    duration: 1,
-    stagger: 0.3,
-    delay: 0.4,
-    ease: "power3.out"
-  });
 
 
   // ====================================
@@ -95,7 +119,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     card.addEventListener("click", () => {
 
-      // Close others
       document.querySelectorAll(".project").forEach(c => {
         if (c !== card) c.classList.remove("expanded");
       });
