@@ -287,57 +287,62 @@ nav a:hover {
   z-index: 10;
 }
 
-/* Stats */
+/* Cinematic About Section */
 
-.cinematic-stats {
-  display: flex;
-  justify-content: center;
-  gap: 80px;
-  margin-bottom: 50px;
+.cinematic-about {
+  text-align: center;
+  padding: 140px 10vw;
 }
 
-.cinematic-stats h3 {
-  font-size: 40px;
-  font-weight: 600;
-}
-
-.cinematic-stats span {
+.chapter-label {
   font-size: 12px;
-  letter-spacing: 2px;
-  color: rgba(255,255,255,0.6);
+  letter-spacing: 6px;
+  color: rgba(255,255,255,0.5);
+  margin-bottom: 20px;
 }
 
-/* Bottom Paragraph */
+.cinematic-title {
+  font-size: 70px;
+  font-weight: 600;
+  margin-bottom: 25px;
+}
 
-.cinematic-bottom {
-  max-width: 800px;
-  margin: 0 auto;
+.cinematic-subtext {
+  max-width: 700px;
+  margin: 0 auto 80px auto;
+  font-size: 18px;
   color: rgba(255,255,255,0.7);
 }
 
-/* Mobile */
+/* Vertical Stats */
 
-@media (max-width: 768px) {
-
-  .cinematic-title {
-    font-size: 42px;
-  }
-
-  .cinematic-cards {
-    flex-wrap: wrap;
-    gap: 20px;
-  }
-
-  .cine-card {
-    transform: rotate(0deg);
-    width: 140px;
-    height: 220px;
-  }
-
-  .cinematic-stats {
-    flex-direction: column;
-    gap: 30px;
-  }
+.cinematic-stats {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 50px;
 }
 
+.stat {
+  text-align: center;
+  width: 250px;
+  padding-bottom: 30px;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.stat:last-child {
+  border-bottom: none;
+}
+
+.stat h3 {
+  font-size: 50px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.stat span {
+  font-size: 12px;
+  letter-spacing: 4px;
+  color: rgba(255,255,255,0.6);
+}
 
