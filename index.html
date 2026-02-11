@@ -12,150 +12,135 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 
-  <!-- CSS -->
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body id="top">
 
-  <!-- HEADER -->
-  <header>
-    <div class="logo">CDOT</div>
-    <nav>
-      <a href="#top">Top</a>
-      <a href="#about">About Me</a>
-      <a href="#projects">Projects</a>
-      <a href="#timeline">Timeline</a>
-      <a href="#videos">Videos</a>
-      <a href="#contact">Contact</a>
-    </nav>
-  </header>
+<header>
+  <div class="logo">CDOT</div>
+  <nav>
+    <a href="#top">Top</a>
+    <a href="#about">About</a>
+    <a href="#projects">Projects</a>
+    <a href="#timeline">Timeline</a>
+    <a href="#videos">Videos</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
 
-  <!-- HERO -->
-  <section class="hero">
-    <div class="hero-left">
-      <img src="me.jpg" alt="Photo of Callum">
-    </div>
-    <div class="hero-right">
-      <h1>cAllumdev</h1>
-      <p class="fade-line">Unity Game Developer</p>
-      <p class="fade-line">Video Editor</p>
-      <p class="fade-line">Other Roles...</p>
-    </div>
-  </section>
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <img src="me.jpg" alt="Photo of Callum">
+  </div>
+  <div class="hero-right">
+    <h1>cAllumdev</h1>
+    <p class="fade-line">Unity Game Developer</p>
+    <p class="fade-line">Video Editor</p>
+    <p class="fade-line">Creative Builder</p>
+  </div>
+</section>
 
-  <!-- ABOUT ME -->
-<section id="about" class="section about cinematic-about">
-
-  <div class="about-content">
-
-    <h2 class="chapter-label">CHAPTER THREE</h2>
-    <h1 class="cinematic-title">documenting the journey</h1>
-
-    <p class="cinematic-subtext">
-      I treat my life like a series of films — from shipping builds at 2 a.m.
-      to boarding flights with a camera in my hand.
+<!-- 01 ABOUT -->
+<section id="about" class="section centered-section">
+  <div class="section-inner">
+    <p class="section-number">01.</p>
+    <h2 class="section-title">Who I Am</h2>
+    <p class="section-text">
+      Hey, I'm Callum — an indie game developer and video editor.
+      I build cinematic experiences through code and storytelling.
+      My goal is to turn small ideas into polished creative projects.
     </p>
+  </div>
+</section>
 
-    <!-- STATS -->
-    <div class="cinematic-stats">
+<!-- 02 PROJECTS -->
+<section id="projects" class="section centered-section">
+  <div class="section-inner">
+    <p class="section-number">02.</p>
+    <h2 class="section-title">Projects</h2>
 
-      <div class="stat">
-        <h3>160K</h3>
-        <span>TOP VIDEO VIEWS</span>
+    <div class="project">
+      <h3>Project One</h3>
+      <p class="short-info">Short description</p>
+      <div class="extra-info">
+        <p>Expanded details about this project and what you learned.</p>
       </div>
+    </div>
 
-      <div class="stat">
-        <h3>~5K</h3>
-        <span>SUBSCRIBERS</span>
+    <div class="project">
+      <h3>Project Two</h3>
+      <p class="short-info">Short description</p>
+      <div class="extra-info">
+        <p>Expanded details about this project and what you built.</p>
       </div>
-
-      <div class="stat">
-        <h3>+ FILMS</h3>
-        <span>SHORT STORIES SHOT</span>
-      </div>
-
     </div>
 
   </div>
-
 </section>
 
+<!-- 03 TIMELINE -->
+<section id="timeline" class="section centered-section">
+  <div class="section-inner">
+    <p class="section-number">03.</p>
+    <h2 class="section-title">Timeline</h2>
 
+    <div class="timeline-vertical">
 
-  <!-- PROJECTS -->
-  <section id="projects" class="section projects">
-    <h2>Projects</h2>
-
-    <div class="project">
-      <h3>Project 1</h3>
-      <p class="short-info">Short description of project 1.</p>
-      <div class="extra-info">
-        <p>Expanded info: details about project 1, challenges, achievements, screenshots, etc.</p>
-      </div>
-    </div>
-
-    <div class="project">
-      <h3>Project 2</h3>
-      <p class="short-info">Short description of project 2.</p>
-      <div class="extra-info">
-        <p>Expanded info: details about project 2, challenges, achievements, screenshots, etc.</p>
-      </div>
-    </div>
-
-  </section>
-
-  <!-- TIMELINE -->
-  <section id="timeline" class="section timeline">
-    <h2>Timeline</h2>
-    <div class="timeline-track">
       <div class="milestone">
-        <img src="timeline1.jpg" alt="2019">
-        <h3>2019 - Started Coding</h3>
+        <h3>2019 — Started Coding</h3>
         <p class="short-info">Short summary</p>
         <div class="extra-info">
-          <p>More details about 2019: what you learned, first projects, achievements...</p>
+          <p>Details about how you started and early projects.</p>
         </div>
       </div>
+
       <div class="milestone">
-        <img src="timeline2.jpg" alt="2020">
-        <h3>2020 - First Game</h3>
+        <h3>2020 — First Game</h3>
         <p class="short-info">Short summary</p>
         <div class="extra-info">
-          <p>Details about your first game: development process, tools, feedback...</p>
+          <p>Details about development process and lessons learned.</p>
         </div>
       </div>
+
       <div class="milestone">
-        <img src="timeline3.jpg" alt="2021">
-        <h3>2021 - Video Editing</h3>
+        <h3>2021 — Video Editing</h3>
         <p class="short-info">Short summary</p>
         <div class="extra-info">
-          <p>Expanded info: video editing projects, software used, achievements...</p>
+          <p>Editing projects, style growth, and storytelling evolution.</p>
         </div>
       </div>
+
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- VIDEOS -->
-  <section id="videos" class="section videos">
-    <h2>Videos</h2>
-    <p>Links or embeds of your video content.</p>
-  </section>
+<!-- 04 VIDEOS -->
+<section id="videos" class="section centered-section">
+  <div class="section-inner">
+    <p class="section-number">04.</p>
+    <h2 class="section-title">Videos</h2>
+    <p class="section-text">Showcase your cinematic edits here.</p>
+  </div>
+</section>
 
-  <!-- CONTACT -->
-  <section id="contact" class="section contact-section">
-    <h2>Work With Me</h2>
-    <div class="contact-content">
-      <video controls autoplay muted loop class="promo-video">
-        <source src="promo.mp4" type="video/mp4">
-        Your browser does not support video.
-      </video>
-      <a href="https://callumdev.com" target="_blank" class="contact-btn">
-        Click Here
-      </a>
-    </div>
-  </section>
+<!-- 05 CONTACT -->
+<section id="contact" class="section centered-section">
+  <div class="section-inner">
+    <p class="section-number">05.</p>
+    <h2 class="section-title">Work With Me</h2>
 
-  <!-- JS -->
-  <script src="script.js"></script>
+    <video controls autoplay muted loop class="promo-video">
+      <source src="promo.mp4" type="video/mp4">
+    </video>
+
+    <a href="https://callumdev.com" target="_blank" class="contact-btn">
+      Click Here
+    </a>
+  </div>
+</section>
+
+<script src="script.js"></script>
 </body>
 </html>
