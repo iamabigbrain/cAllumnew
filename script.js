@@ -5,6 +5,28 @@ document.addEventListener("DOMContentLoaded", function () {
   // ====================================
   gsap.registerPlugin(ScrollTrigger);
 
+  // ====================================
+  // HEADER DROP + FADE IN
+  // ====================================
+  gsap.from("header", {
+    y: -80,
+    opacity: 0,
+    duration: 1,
+    ease: "power3.out"
+  });
+
+
+  // ====================================
+  // HERO IMAGE FADE IN
+  // ====================================
+  gsap.from(".hero-left img", {
+    opacity: 0,
+    scale: 0.9,
+    duration: 1.2,
+    delay: 0.3,
+    ease: "power3.out"
+  });
+
 
   // ====================================
   // HERO IMAGE MOUSE PULL (TOWARDS MOUSE)
