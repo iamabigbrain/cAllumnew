@@ -100,3 +100,105 @@ document.querySelectorAll("nav a").forEach(link => {
     target.scrollIntoView({behavior: "smooth"});
   });
 });
+
+// ================================
+// REGISTER GSAP SCROLLTRIGGER
+// ================================
+gsap.registerPlugin(ScrollTrigger);
+
+// ================================
+// 2️⃣ SECTION FADE-IN ON SCROLL
+// ================================
+gsap.utils.toArray(".section").forEach(section => {
+  gsap.fromTo(section,
+    {
+      opacity: 0,
+      y: 80
+    },
+    {
+      opacity: 1,
+      y: 0,
+      duration: 1,
+      ease: "power3.out",
+      scrollTrigger: {
+        trigger: section,
+        start: "top 85%",
+        toggleActions: "play none none reverse"
+      }
+    }
+  );
+});
+
+
+// ================================
+// 3️⃣ PROJECT HOVER EFFECT (RED)
+// ================================
+document.querySelectorAll(".project").forEach(card => {
+
+  card.addEventListener("mouseenter", () => {
+    gsap.to(card, {
+      scale: 1.06,
+      boxShadow: "0 20px 40px rgba(255,0,0,0.35)",
+      duration: 0.3,
+      ease: "power2.out"
+    });
+  });
+
+  card.addEventListener("mouseleave", () => {
+    gsap.to(card, {
+      scale: 1,
+      boxShadow: "0 0 0 rgba(0,0,0,0)",
+      duration: 0.3,
+      ease: "power2.out"
+    });
+  });
+
+});
+
+
+// ================================
+// 4️⃣ TIMELINE HOVER EFFECT (RED)
+// ================================
+document.querySelectorAll(".milestone").forEach(milestone => {
+
+  milestone.addEventListener("mouseenter", () => {
+    gsap.to(milestone, {
+      scale: 1.1,
+      boxShadow: "0 20px 40px rgba(255,0,0,0.45)",
+      duration: 0.3,
+      ease: "power2.out"
+    });
+  });
+
+  milestone.addEventListener("mouseleave", () => {
+    gsap.to(milestone, {
+      scale: 1,
+      boxShadow: "0 0 0 rgba(0,0,0,0)",
+      duration: 0.3,
+      ease: "power2.out"
+    });
+  });
+
+});
+
+
+// ================================
+// 5️⃣ SMOOTH NAV SCROLL
+// ================================
+document.querySelectorAll("nav a").forEach(link => {
+
+  link.addEventListener("click", e => {
+    e.preventDefault();
+
+    const target = document.querySelector(
+      link.getAttribute("href")
+    );
+
+    target.scrollIntoView({
+      behavior: "smooth"
+    });
+
+  });
+
+});
+
