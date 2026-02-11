@@ -6,14 +6,12 @@ document.addEventListener("DOMContentLoaded", function () {
   gsap.registerPlugin(ScrollTrigger);
 
 
-  // ================================
-  // HERO IMAGE MOUSE PULL
-  // ================================
-  
+ // ================================
+// HERO IMAGE MOUSE PULL (TOWARD)
+// ================================
 const heroImage = document.querySelector(".hero-left img");
 
 document.addEventListener("mousemove", e => {
-
   const x = (e.clientX - window.innerWidth / 2) / 25;
   const y = (e.clientY - window.innerHeight / 2) / 25;
 
@@ -23,84 +21,90 @@ document.addEventListener("mousemove", e => {
     duration: 0.6,
     ease: "power3.out"
   });
-
 });
 
-
-  // ================================
-  // FADE OUT HERO ON SCROLL
-  // ================================
-  gsap.to(".hero", {
-    scrollTrigger: {
-      trigger: ".hero",
-      start: "top top",
-      end: "bottom top",
-      scrub: true
-    },
-    opacity: 0
-  });
-
-
-  // ================================
-  // SECTION FADE-IN
-  // ================================
 // ================================
-// SECTION FADE IN + OUT (SMOOTH)
+// GSAP SCROLL FADE-IN SECTIONS
 // ================================
+gsap.registerPlugin(ScrollTrigger);
+
 gsap.utils.toArray(".section").forEach(section => {
-
   gsap.fromTo(section,
-    {
-      opacity: 0,
-      y: 80
-    },
+    { opacity: 0, y: 50 },
     {
       opacity: 1,
       y: 0,
+      duration: 1,
       ease: "power3.out",
       scrollTrigger: {
         trigger: section,
-        start: "top 80%",
-        end: "bottom 20%",
-        scrub: true
+        start: "top 85%",
+        toggleActions: "play none none reverse"
       }
     }
   );
-
 });
 
-
-
-  // ================================
-  // PROJECT HOVER EFFECT
-  // ================================
-  document.querySelectorAll(".project").forEach(card => {
-
-    card.addEventListener("mouseenter", () => {
-      gsap.to(card, {
-        scale: 1.06,
-        boxShadow: "0 20px 40px rgba(255,0,0,0.35)",
-        duration: 0.3,
-        ease: "power2.out"
-      });
+// ================================
+// PROJECT CARDS HOVER EFFECT
+// ================================
+document.querySelectorAll(".project").forEach(card => {
+  card.addEventListener("mouseenter", () => {
+    gsap.to(card, {
+      scale: 1.06,
+      boxShadow: "0 20px 40px rgba(255,0,0,0.35)",
+      duration: 0.3,
+      ease: "power2.out"
     });
-
-    card.addEventListener("mouseleave", () => {
-      gsap.to(card, {
-        scale: 1,
-        boxShadow: "0 0 0 rgba(0,0,0,0)",
-        duration: 0.3,
-        ease: "power2.out"
-      });
-    });
-
   });
 
+  card.addEventListener("mouseleave", () => {
+    gsap.to(card, {
+      scale: 1,
+      boxShadow: "0 0 0 rgba(0,0,0,0)",
+      duration: 0.3,
+      ease: "power2.out"
+    });
+  });
+});
 
 // ================================
-// TIMELINE HORIZONTAL HOVER/DRAG
+// TIMELINE CARDS HOVER EFFECT
 // ================================
+document.querySelectorAll(".milestone").forEach(milestone => {
+  milestone.addEventListener("mouseenter", () => {
+    gsap.to(milestone, {
+      scale: 1.1,
+      boxShadow: "0 20px 40px rgba(255,0,0,0.45)",
+      duration: 0.3,
+      ease: "power2.out"
+    });
+  });
 
+  milestone.addEventListener("mouseleave", () => {
+    gsap.to(milestone, {
+      scale: 1,
+      boxShadow: "0 0 0 rgba(0,0,0,0)",
+      duration: 0.3,
+      ease: "power2.out"
+    });
+  });
+});
+
+// ================================
+// NAV LINKS SMOOTH SCROLL
+// ================================
+document.querySelectorAll("nav a").forEach(link => {
+  link.addEventListener("click", e => {
+    e.preventDefault();
+    const target = document.querySelector(link.getAttribute("href"));
+    target.scrollIntoView({ behavior: "smooth" });
+  });
+});
+
+// ================================
+// TIMELINE HORIZONTAL DRAG
+// ================================
 const timeline = document.querySelector(".timeline-track");
 let isDragging = false;
 let startX;
@@ -126,32 +130,28 @@ timeline.addEventListener("mouseup", () => {
 timeline.addEventListener("mousemove", e => {
   if(!isDragging) return;
   e.preventDefault();
-  const x = e.pageX - timeline.offsetLeft;
-  const walk = (x - startX) * 2; // scroll speed
+  const x = e.pageX - startX;
+  const walk = x * 2; // adjust drag speed
   timeline.scrollLeft = scrollLeft - walk;
 });
 
-
-
-
-  // ================================
-  // SMOOTH NAV SCROLL
-  // ================================
-  document.querySelectorAll("nav a").forEach(link => {
-
-    link.addEventListener("click", e => {
-      e.preventDefault();
-
-      const target = document.querySelector(link.getAttribute("href"));
-
-      if (target) {
-        target.scrollIntoView({
-          behavior: "smooth"
-        });
-      }
-
-    });
-
-  });
-
+// ================================
+// MOBILE TOUCH SUPPORT FOR TIMELINE
+// ================================
+timeline.addEventListener("touchstart", e => {
+  isDragging = true;
+  startX = e.touches[0].pageX - timeline.offsetLeft;
+  scrollLeft = timeline.scrollLeft;
 });
+
+timeline.addEventListener("touchend", () => {
+  isDragging = false;
+});
+
+timeline.addEventListener("touchmove", e => {
+  if(!isDragging) return;
+  const x = e.touches[0].pageX - startX;
+  const walk = x * 2;
+  timeline.scrollLeft = scrollLeft - walk;
+});
+
