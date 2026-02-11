@@ -1,29 +1,16 @@
 document.addEventListener("DOMContentLoaded", function () {
 
-  // ================================
-  // REGISTER GSAP
-  // ================================
   gsap.registerPlugin(ScrollTrigger);
 
-  // ================================
-  // HERO IMAGE MOUSE PULL (toward mouse)
-  // ================================
+  // Hero image moves toward mouse
   const heroImage = document.querySelector(".hero-left img");
   document.addEventListener("mousemove", e => {
     const x = (e.clientX - window.innerWidth / 2) / 25;
     const y = (e.clientY - window.innerHeight / 2) / 25;
-
-    gsap.to(heroImage, {
-      x: x,
-      y: y,
-      duration: 0.6,
-      ease: "power3.out"
-    });
+    gsap.to(heroImage, { x: x, y: y, duration: 0.6, ease: "power3.out" });
   });
 
-  // ================================
-  // FADE IN HERO TEXT ON LOAD
-  // ================================
+  // Fade in hero text
   gsap.from(".hero-right h1, .hero-right p", {
     opacity: 0,
     y: 40,
@@ -32,9 +19,7 @@ document.addEventListener("DOMContentLoaded", function () {
     ease: "power3.out"
   });
 
-  // ================================
-  // FADE OUT HERO ON SCROLL
-  // ================================
+  // Fade out hero on scroll
   gsap.to(".hero", {
     scrollTrigger: {
       trigger: ".hero",
@@ -45,55 +30,28 @@ document.addEventListener("DOMContentLoaded", function () {
     opacity: 0
   });
 
-  // ================================
-  // SECTION FADE-IN
-  // ================================
+  // Section fade in
   gsap.utils.toArray(".section").forEach(section => {
     gsap.fromTo(section,
       { opacity: 0, y: 80 },
-      {
-        opacity: 1,
-        y: 0,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: section,
-          start: "top 80%",
-          end: "bottom 20%",
-          scrub: true
-        }
-      });
+      { opacity: 1, y: 0, ease: "power3.out", scrollTrigger: { trigger: section, start: "top 80%", end: "bottom 20%", scrub: true } }
+    );
   });
 
-  // ================================
-  // PROJECT HOVER EFFECT
-  // ================================
+  // Project hover
   document.querySelectorAll(".project").forEach(card => {
-    card.addEventListener("mouseenter", () => {
-      gsap.to(card, { scale: 1.06, boxShadow: "0 20px 40px rgba(255,0,0,0.35)", duration: 0.3, ease: "power2.out" });
-    });
-    card.addEventListener("mouseleave", () => {
-      gsap.to(card, { scale: 1, boxShadow: "0 0 0 rgba(0,0,0,0)", duration: 0.3, ease: "power2.out" });
-    });
+    card.addEventListener("mouseenter", () => gsap.to(card, { scale: 1.06, boxShadow: "0 20px 40px rgba(255,0,0,0.35)", duration: 0.3, ease: "power2.out" }));
+    card.addEventListener("mouseleave", () => gsap.to(card, { scale: 1, boxShadow: "0 0 0 rgba(0,0,0,0)", duration: 0.3, ease: "power2.out" }));
   });
 
-  // ================================
-  // TIMELINE HOVER EFFECT
-  // ================================
+  // Timeline hover
   document.querySelectorAll(".milestone").forEach(milestone => {
     gsap.set(milestone, { scale: 1, transformOrigin: "center center" });
-
-    milestone.addEventListener("mouseenter", () => {
-      gsap.to(milestone, { scale: 1.12, boxShadow: "0 20px 40px rgba(255,0,0,0.45)", duration: 0.4, ease: "power3.out", overwrite: "auto" });
-    });
-
-    milestone.addEventListener("mouseleave", () => {
-      gsap.to(milestone, { scale: 1, boxShadow: "0 0 0 rgba(0,0,0,0)", duration: 0.4, ease: "power3.out", overwrite: "auto" });
-    });
+    milestone.addEventListener("mouseenter", () => gsap.to(milestone, { scale: 1.12, boxShadow: "0 20px 40px rgba(255,0,0,0.45)", duration: 0.4, ease: "power3.out" }));
+    milestone.addEventListener("mouseleave", () => gsap.to(milestone, { scale: 1, boxShadow: "0 0 0 rgba(0,0,0,0)", duration: 0.4, ease: "power3.out" }));
   });
 
-  // ================================
-  // SMOOTH NAV SCROLL
-  // ================================
+  // Smooth nav scroll
   document.querySelectorAll("nav a").forEach(link => {
     link.addEventListener("click", e => {
       e.preventDefault();
