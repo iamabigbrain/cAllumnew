@@ -92,29 +92,41 @@ gsap.utils.toArray(".section").forEach(section => {
 
 
   // ================================
-  // TIMELINE HOVER EFFECT
-  // ================================
-  document.querySelectorAll(".milestone").forEach(milestone => {
+// TIMELINE MILESTONES HOVER (SMOOTH)
+// ================================
 
-    milestone.addEventListener("mouseenter", () => {
-      gsap.to(milestone, {
-        scale: 1.1,
-        boxShadow: "0 20px 40px rgba(255,0,0,0.45)",
-        duration: 0.3,
-        ease: "power2.out"
-      });
-    });
+const milestones = document.querySelectorAll(".milestone");
 
-    milestone.addEventListener("mouseleave", () => {
-      gsap.to(milestone, {
-        scale: 1,
-        boxShadow: "0 0 0 rgba(0,0,0,0)",
-        duration: 0.3,
-        ease: "power2.out"
-      });
-    });
+milestones.forEach(milestone => {
 
+  // Set a smooth baseline
+  gsap.set(milestone, {
+    scale: 1,
+    transformOrigin: "center center"
   });
+
+  milestone.addEventListener("mouseenter", () => {
+    gsap.to(milestone, {
+      scale: 1.12,
+      boxShadow: "0 20px 40px rgba(255,0,0,0.45)",
+      duration: 0.4,
+      ease: "power3.out",
+      overwrite: "auto"
+    });
+  });
+
+  milestone.addEventListener("mouseleave", () => {
+    gsap.to(milestone, {
+      scale: 1,
+      boxShadow: "0 0 0 rgba(0,0,0,0)",
+      duration: 0.4,
+      ease: "power3.out",
+      overwrite: "auto"
+    });
+  });
+
+});
+
 
 
   // ================================
