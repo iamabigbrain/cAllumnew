@@ -58,8 +58,8 @@ document.addEventListener("DOMContentLoaded", function () {
   if (heroImage) {
     document.addEventListener("mousemove", e => {
 
-      const x = (e.clientX - window.innerWidth / 2) / 25;
-      const y = (e.clientY - window.innerHeight / 2) / 25;
+      const x = (e.clientX - window.innerWidth / 3) / 25;
+      const y = (e.clientY - window.innerHeight / 3) / 25;
 
       gsap.to(heroImage, {
         x: x,
