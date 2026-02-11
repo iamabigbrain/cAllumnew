@@ -1,12 +1,4 @@
-document.addEventListener("DOMContentLoaded", function () {
-
-  // ================================
-  // REGISTER GSAP
-  // ================================
-  gsap.registerPlugin(ScrollTrigger);
-
-
- // ================================
+// ================================
 // HERO IMAGE MOUSE PULL (TOWARD)
 // ================================
 const heroImage = document.querySelector(".hero-left img");
@@ -30,7 +22,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 gsap.utils.toArray(".section").forEach(section => {
   gsap.fromTo(section,
-    { opacity: 0, y: 50 },
+    { opacity: 0, y: 40 },
     {
       opacity: 1,
       y: 0,
@@ -38,7 +30,7 @@ gsap.utils.toArray(".section").forEach(section => {
       ease: "power3.out",
       scrollTrigger: {
         trigger: section,
-        start: "top 85%",
+        start: "top 90%", // triggers when section top is 90% down the viewport
         toggleActions: "play none none reverse"
       }
     }
@@ -103,13 +95,14 @@ document.querySelectorAll("nav a").forEach(link => {
 });
 
 // ================================
-// TIMELINE HORIZONTAL DRAG
+// TIMELINE HORIZONTAL DRAG (WITHOUT BLOCKING VERTICAL SCROLL)
 // ================================
 const timeline = document.querySelector(".timeline-track");
 let isDragging = false;
 let startX;
 let scrollLeft;
 
+// Mouse events
 timeline.addEventListener("mousedown", e => {
   isDragging = true;
   startX = e.pageX - timeline.offsetLeft;
@@ -129,15 +122,12 @@ timeline.addEventListener("mouseup", () => {
 
 timeline.addEventListener("mousemove", e => {
   if(!isDragging) return;
-  e.preventDefault();
   const x = e.pageX - startX;
   const walk = x * 2; // adjust drag speed
   timeline.scrollLeft = scrollLeft - walk;
 });
 
-// ================================
-// MOBILE TOUCH SUPPORT FOR TIMELINE
-// ================================
+// Touch events for mobile
 timeline.addEventListener("touchstart", e => {
   isDragging = true;
   startX = e.touches[0].pageX - timeline.offsetLeft;
@@ -154,4 +144,3 @@ timeline.addEventListener("touchmove", e => {
   const walk = x * 2;
   timeline.scrollLeft = scrollLeft - walk;
 });
-
