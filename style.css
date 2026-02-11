@@ -88,6 +88,7 @@ nav a:hover {
 .project {
   margin-top: 20px;
   padding: 30px;
+  align-items: center;
   background: rgba(255,255,255,0.05);
   backdrop-filter: blur(10px);
   border-radius: 20px;
