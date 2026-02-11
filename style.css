@@ -41,7 +41,7 @@ nav a {
 }
 
 nav a:hover {
-  color: #00ffff;
+  color: #ff2a2a; /* 🔥 RED instead of blue */
 }
 
 /* HERO */
@@ -53,14 +53,15 @@ nav a:hover {
   padding: 0 10vw;
 }
 
-.hero-left, .hero-right {
+.hero-left, 
+.hero-right {
   flex: 1;
 }
 
 .hero-left img {
   width: 100%;
   max-width: 420px;
-  border-radius: 16px;
+  border-radius: 20px;
   transition: transform 0.2s ease-out;
 }
 
@@ -87,21 +88,63 @@ nav a:hover {
 /* PROJECT CARDS */
 .project {
   margin-top: 20px;
-  padding: 20px;
+  padding: 30px;
   background: rgba(255,255,255,0.05);
-  border-radius: 12px;
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  border: 1px solid rgba(255,255,255,0.08);
+
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   cursor: pointer;
+}
+
+.project:hover {
+  box-shadow: 0 20px 40px rgba(255, 0, 0, 0.35);
 }
 
 /* TIMELINE */
 .timeline {
   overflow: hidden;
   position: relative;
+  margin-top: 40px;
 }
 
 .timeline-track {
   display: flex;
   gap: 50px;
-  transition: transform 0.1s linear;
+  transition: transform 0.3s ease;
+}
+
+/* TIMELINE CARDS (MATCH PROJECT STYLE) */
+.milestone {
+  min-width: 280px;
+  padding: 30px;
+
+  background: rgba(255,255,255,0.05);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  border: 1px solid rgba(255,255,255,0.08);
+
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.milestone img {
+  width: 100%;
+  border-radius: 15px;
+  margin-bottom: 15px;
+}
+
+.milestone h3 {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.milestone p {
+  font-size: 14px;
+  opacity: 0.8;
+}
+
+.milestone:hover {
+  box-shadow: 0 20px 40px rgba(255, 0, 0, 0.4);
 }
