@@ -71,6 +71,29 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
+  // FADE IN HERO TEXT LINES
+gsap.utils.toArray(".fade-line").forEach((line, i) => {
+  gsap.from(line, {
+    opacity: 0,
+    y: 30,
+    delay: i * 0.3, // stagger each line
+    duration: 1,
+    ease: "power3.out"
+  });
+});
+
+  gsap.to(".hero", {
+  scrollTrigger: {
+    trigger: ".hero",
+    start: "top top",
+    end: "bottom top",
+    scrub: true
+  },
+  opacity: 0
+});
+
+
+
 
   // ====================================
   // HERO FADE OUT ON SCROLL
