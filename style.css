@@ -1,6 +1,4 @@
-/* =======================
-   RESET + BASE
-======================= */
+/* RESET */
 * {
   margin: 0;
   padding: 0;
@@ -15,9 +13,7 @@ body {
   overflow-x: hidden;
 }
 
-/* =======================
-   HEADER
-======================= */
+/* HEADER */
 header {
   position: fixed;
   top: 0;
@@ -45,12 +41,10 @@ nav a {
 }
 
 nav a:hover {
-  color: #ff0000;
+  color: #ff2a2a; /* 🔥 RED instead of blue */
 }
 
-/* =======================
-   HERO
-======================= */
+/* HERO */
 .hero {
   display: flex;
   align-items: center;
@@ -59,14 +53,15 @@ nav a:hover {
   padding: 0 10vw;
 }
 
-.hero-left, .hero-right {
+.hero-left, 
+.hero-right {
   flex: 1;
 }
 
 .hero-left img {
   width: 100%;
   max-width: 420px;
-  border-radius: 16px;
+  border-radius: 20px;
   transition: transform 0.2s ease-out;
 }
 
@@ -82,104 +77,152 @@ nav a:hover {
   margin-bottom: 12px;
 }
 
-/* =======================
-   SECTIONS
-======================= */
+/* SECTIONS */
 .section {
   min-height: 80vh;
   padding: 120px 10vw;
-  opacity: 0; /* fade-in handled by JS */
+  opacity: 0;
   transform: translateY(40px);
 }
 
-/* =======================
-   PROJECT CARDS
-======================= */
+/* PROJECT CARDS */
 .project {
   margin-top: 20px;
-  padding: 20px;
+  padding: 30px;
   background: rgba(255,255,255,0.05);
-  border-radius: 12px;
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  border: 1px solid rgba(255,255,255,0.08);
+
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   cursor: pointer;
 }
 
-/* =======================
-   TIMELINE
-======================= */
+.project:hover {
+  box-shadow: 0 20px 40px rgba(255, 0, 0, 0.35);
+}
+
+/* TIMELINE */
 .timeline {
-  overflow-x: auto;
-  overflow-y: hidden;
-  padding: 20px 0;
+  overflow: hidden;
+  position: relative;
+  margin-top: 40px;
 }
 
 .timeline-track {
   display: flex;
   gap: 50px;
+  transition: transform 0.3s ease;
 }
 
+/* TIMELINE CARDS (MATCH PROJECT STYLE) */
 .milestone {
-  min-width: 200px;
-  padding: 20px;
+  min-width: 280px;
+  padding: 30px;
+
   background: rgba(255,255,255,0.05);
-  border-radius: 12px;
-  cursor: pointer;
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  border: 1px solid rgba(255,255,255,0.08);
+
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
 }
 
-/* =======================
-   CONTACT
-======================= */
-.contact {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.milestone img {
+  width: 100%;
+  border-radius: 15px;
+  margin-bottom: 15px;
+}
+
+.milestone h3 {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.milestone p {
+  font-size: 14px;
+  opacity: 0.8;
+}
+
+.milestone:hover {
+  box-shadow: 0 20px 40px rgba(255, 0, 0, 0.4);
+}
+
+/* ============================= */
+/* CONTACT SECTION */
+/* ============================= */
+
+.contact-section {
   text-align: center;
 }
 
-.contact video {
-  width: 80%;
+.contact-section h2 {
+  font-size: 40px;
+  margin-bottom: 40px;
+}
+
+.contact-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+}
+
+.promo-video {
+  width: 100%;
   max-width: 600px;
-  border-radius: 12px;
-  margin: 20px 0;
+  border-radius: 20px;
+  box-shadow: 0 20px 50px rgba(255,0,0,0.3);
 }
 
-.contact button {
-  padding: 12px 24px;
-  background: #ff0000;
+.contact-btn {
+  display: inline-block;
+  padding: 15px 40px;
+  background: #ff2a2a;
   color: #fff;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  font-weight: 600;
-  transition: background 0.3s ease;
+  font-weight: 700;
+  text-decoration: none;
+  border-radius: 40px;
+  transition: all 0.3s ease;
 }
 
-.contact button:hover {
-  background: #cc0000;
+.contact-btn:hover {
+  transform: scale(1.08);
+  box-shadow: 0 15px 35px rgba(255,0,0,0.5);
 }
 
-/* =======================
-   MOBILE RESPONSIVE
-======================= */
-@media (max-width: 768px) {
+/* ============================= */
+/* MOBILE RESPONSIVE */
+/* ============================= */
+
+@media (max-width: 900px) {
+
   .hero {
     flex-direction: column;
     text-align: center;
+    padding-top: 120px;
   }
 
-  .hero-left, .hero-right {
-    flex: unset;
-    width: 100%;
+  .hero-left img {
+    max-width: 300px;
+    margin-bottom: 30px;
+  }
+
+  .hero-right h1 {
+    font-size: 42px;
+  }
+
+  nav {
+    display: none; /* hides nav on small screens for now */
+  }
+
+  .section {
+    padding: 100px 6vw;
   }
 
   .timeline-track {
-    flex-direction: column;
-    overflow-x: hidden;
+    gap: 20px;
   }
 
-  nav a {
-    margin-left: 15px;
-    font-size: 16px;
-  }
 }
