@@ -97,41 +97,40 @@ gsap.utils.toArray(".section").forEach(section => {
   });
 
 
-  // ================================
-// TIMELINE MILESTONES HOVER (SMOOTH)
+// ================================
+// TIMELINE HORIZONTAL HOVER/DRAG
 // ================================
 
-const milestones = document.querySelectorAll(".milestone");
+const timeline = document.querySelector(".timeline-track");
+let isDragging = false;
+let startX;
+let scrollLeft;
 
-milestones.forEach(milestone => {
-
-  // Set a smooth baseline
-  gsap.set(milestone, {
-    scale: 1,
-    transformOrigin: "center center"
-  });
-
-  milestone.addEventListener("mouseenter", () => {
-    gsap.to(milestone, {
-      scale: 1.12,
-      boxShadow: "0 20px 40px rgba(255,0,0,0.45)",
-      duration: 0.4,
-      ease: "power3.out",
-      overwrite: "auto"
-    });
-  });
-
-  milestone.addEventListener("mouseleave", () => {
-    gsap.to(milestone, {
-      scale: 1,
-      boxShadow: "0 0 0 rgba(0,0,0,0)",
-      duration: 0.4,
-      ease: "power3.out",
-      overwrite: "auto"
-    });
-  });
-
+timeline.addEventListener("mousedown", e => {
+  isDragging = true;
+  startX = e.pageX - timeline.offsetLeft;
+  scrollLeft = timeline.scrollLeft;
+  timeline.style.cursor = "grabbing";
 });
+
+timeline.addEventListener("mouseleave", () => {
+  isDragging = false;
+  timeline.style.cursor = "grab";
+});
+
+timeline.addEventListener("mouseup", () => {
+  isDragging = false;
+  timeline.style.cursor = "grab";
+});
+
+timeline.addEventListener("mousemove", e => {
+  if(!isDragging) return;
+  e.preventDefault();
+  const x = e.pageX - timeline.offsetLeft;
+  const walk = (x - startX) * 2; // scroll speed
+  timeline.scrollLeft = scrollLeft - walk;
+});
+
 
 
 
