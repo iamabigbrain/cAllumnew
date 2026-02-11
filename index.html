@@ -12,6 +12,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 
+  <!-- CSS -->
   <link rel="stylesheet" href="style.css">
 </head>
 <body id="top">
@@ -51,14 +52,23 @@
   <!-- PROJECTS -->
   <section id="projects" class="section projects">
     <h2>Projects</h2>
+
     <div class="project">
       <h3>Project 1</h3>
-      <p>Description of project 1.</p>
+      <p class="short-info">Short description of project 1.</p>
+      <div class="extra-info">
+        <p>Expanded info: details about project 1, challenges, achievements, screenshots, etc.</p>
+      </div>
     </div>
+
     <div class="project">
       <h3>Project 2</h3>
-      <p>Description of project 2.</p>
+      <p class="short-info">Short description of project 2.</p>
+      <div class="extra-info">
+        <p>Expanded info: details about project 2, challenges, achievements, screenshots, etc.</p>
+      </div>
     </div>
+
   </section>
 
   <!-- TIMELINE -->
@@ -67,23 +77,27 @@
     <div class="timeline-track">
       <div class="milestone">
         <img src="timeline1.jpg" alt="2019">
-        <p>2019 - Started Coding</p>
+        <h3>2019 - Started Coding</h3>
+        <p class="short-info">Short summary</p>
+        <div class="extra-info">
+          <p>More details about 2019: what you learned, first projects, achievements...</p>
+        </div>
       </div>
       <div class="milestone">
         <img src="timeline2.jpg" alt="2020">
-        <p>2020 - First Game</p>
+        <h3>2020 - First Game</h3>
+        <p class="short-info">Short summary</p>
+        <div class="extra-info">
+          <p>Details about your first game: development process, tools, feedback...</p>
+        </div>
       </div>
       <div class="milestone">
         <img src="timeline3.jpg" alt="2021">
-        <p>2021 - Video Editing</p>
-      </div>
-      <div class="milestone">
-        <img src="timeline4.jpg" alt="2022">
-        <p>2022 - Portfolio Launch</p>
-      </div>
-      <div class="milestone">
-        <img src="timeline5.jpg" alt="2023">
-        <p>2023 - Projects & Growth</p>
+        <h3>2021 - Video Editing</h3>
+        <p class="short-info">Short summary</p>
+        <div class="extra-info">
+          <p>Expanded info: video editing projects, software used, achievements...</p>
+        </div>
       </div>
     </div>
   </section>
@@ -102,10 +116,13 @@
         <source src="promo.mp4" type="video/mp4">
         Your browser does not support video.
       </video>
-      <a href="https://callumdev.com" target="_blank" class="contact-btn">Click Here</a>
+      <a href="https://callumdev.com" target="_blank" class="contact-btn">
+        Click Here
+      </a>
     </div>
   </section>
 
+  <!-- JS -->
   <script src="script.js"></script>
 </body>
 </html>
