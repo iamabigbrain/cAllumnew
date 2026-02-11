@@ -219,62 +219,125 @@ nav a:hover {
   .section { padding: 100px 6vw; }
 }
 
-/* Cinematic About Section */
+/* ============================= */
+/* CINEMATIC ABOUT SECTION */
+/* ============================= */
 
-.cinematic-about {
+.cinematic {
   text-align: center;
-  padding: 140px 10vw;
+  max-width: 1100px;
+  margin: 0 auto;
 }
 
 .chapter-label {
   font-size: 12px;
-  letter-spacing: 6px;
-  color: rgba(255,255,255,0.5);
+  letter-spacing: 4px;
+  color: #ff2c2c;
   margin-bottom: 20px;
 }
 
 .cinematic-title {
-  font-size: 70px;
-  font-weight: 600;
-  margin-bottom: 25px;
+  font-size: 72px;
+  font-weight: 300;
+  margin-bottom: 20px;
 }
 
-.cinematic-subtext {
-  max-width: 700px;
-  margin: 0 auto 80px auto;
+.cinematic-sub {
+  max-width: 750px;
+  margin: 0 auto 60px;
   font-size: 18px;
   color: rgba(255,255,255,0.7);
 }
 
-/* Vertical Stats */
+/* Cards Layout */
+
+.cinematic-cards {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: -40px;
+  margin-bottom: 60px;
+  perspective: 1000px;
+}
+
+.cine-card {
+  width: 200px;
+  height: 320px;
+  overflow: hidden;
+  border-radius: 20px;
+  transform: rotate(-5deg);
+  transition: 0.4s ease;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+}
+
+.cine-card:nth-child(2) { transform: rotate(-2deg); }
+.cine-card:nth-child(3) { transform: rotate(0deg); }
+.cine-card:nth-child(4) { transform: rotate(2deg); }
+.cine-card:nth-child(5) { transform: rotate(5deg); }
+
+.cine-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Hover Effect */
+.cine-card:hover {
+  transform: rotate(0deg) scale(1.05);
+  z-index: 10;
+}
+
+/* Stats */
 
 .cinematic-stats {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 50px;
+  justify-content: center;
+  gap: 80px;
+  margin-bottom: 50px;
 }
 
-.stat {
-  text-align: center;
-  width: 250px;
-  padding-bottom: 30px;
-  border-bottom: 1px solid rgba(255,255,255,0.1);
-}
-
-.stat:last-child {
-  border-bottom: none;
-}
-
-.stat h3 {
-  font-size: 50px;
+.cinematic-stats h3 {
+  font-size: 40px;
   font-weight: 600;
-  margin-bottom: 8px;
 }
 
-.stat span {
+.cinematic-stats span {
   font-size: 12px;
-  letter-spacing: 4px;
+  letter-spacing: 2px;
   color: rgba(255,255,255,0.6);
 }
+
+/* Bottom Paragraph */
+
+.cinematic-bottom {
+  max-width: 800px;
+  margin: 0 auto;
+  color: rgba(255,255,255,0.7);
+}
+
+/* Mobile */
+
+@media (max-width: 768px) {
+
+  .cinematic-title {
+    font-size: 42px;
+  }
+
+  .cinematic-cards {
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  .cine-card {
+    transform: rotate(0deg);
+    width: 140px;
+    height: 220px;
+  }
+
+  .cinematic-stats {
+    flex-direction: column;
+    gap: 30px;
+  }
+}
+
 
