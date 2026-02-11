@@ -218,3 +218,63 @@ nav a:hover {
   nav { display: none; }
   .section { padding: 100px 6vw; }
 }
+
+/* Cinematic About Section */
+
+.cinematic-about {
+  text-align: center;
+  padding: 140px 10vw;
+}
+
+.chapter-label {
+  font-size: 12px;
+  letter-spacing: 6px;
+  color: rgba(255,255,255,0.5);
+  margin-bottom: 20px;
+}
+
+.cinematic-title {
+  font-size: 70px;
+  font-weight: 600;
+  margin-bottom: 25px;
+}
+
+.cinematic-subtext {
+  max-width: 700px;
+  margin: 0 auto 80px auto;
+  font-size: 18px;
+  color: rgba(255,255,255,0.7);
+}
+
+/* Vertical Stats */
+
+.cinematic-stats {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 50px;
+}
+
+.stat {
+  text-align: center;
+  width: 250px;
+  padding-bottom: 30px;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.stat:last-child {
+  border-bottom: none;
+}
+
+.stat h3 {
+  font-size: 50px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.stat span {
+  font-size: 12px;
+  letter-spacing: 4px;
+  color: rgba(255,255,255,0.6);
+}
+
