@@ -21,20 +21,17 @@ document.addEventListener("mousemove", e => {
 gsap.registerPlugin(ScrollTrigger);
 
 gsap.utils.toArray(".section").forEach(section => {
-  gsap.fromTo(section,
-    { opacity: 0, y: 40 },
-    {
-      opacity: 1,
-      y: 0,
-      duration: 1,
-      ease: "power3.out",
-      scrollTrigger: {
-        trigger: section,
-        start: "top 90%", // triggers when section top is 90% down the viewport
-        toggleActions: "play none none reverse"
-      }
+  gsap.from(section, {
+    opacity: 0,
+    y: 40,
+    duration: 1,
+    ease: "power3.out",
+    scrollTrigger: {
+      trigger: section,
+      start: "top 90%", // trigger when top of section hits 90% down viewport
+      toggleActions: "play none none reverse"
     }
-  );
+  });
 });
 
 // ================================
@@ -61,7 +58,7 @@ document.querySelectorAll(".project").forEach(card => {
 });
 
 // ================================
-// TIMELINE CARDS HOVER EFFECT
+// TIMELINE MILESTONES HOVER EFFECT
 // ================================
 document.querySelectorAll(".milestone").forEach(milestone => {
   milestone.addEventListener("mouseenter", () => {
@@ -95,52 +92,56 @@ document.querySelectorAll("nav a").forEach(link => {
 });
 
 // ================================
-// TIMELINE HORIZONTAL DRAG (WITHOUT BLOCKING VERTICAL SCROLL)
+// TIMELINE DRAG (HORIZONTAL DESKTOP / VERTICAL MOBILE)
 // ================================
 const timeline = document.querySelector(".timeline-track");
-let isDragging = false;
-let startX;
-let scrollLeft;
+const isMobile = window.innerWidth <= 768;
 
-// Mouse events
-timeline.addEventListener("mousedown", e => {
-  isDragging = true;
-  startX = e.pageX - timeline.offsetLeft;
-  scrollLeft = timeline.scrollLeft;
-  timeline.style.cursor = "grabbing";
-});
+if (!isMobile) {
+  // Horizontal drag for desktop
+  let isDragging = false;
+  let startX;
+  let scrollLeft;
 
-timeline.addEventListener("mouseleave", () => {
-  isDragging = false;
-  timeline.style.cursor = "grab";
-});
+  timeline.addEventListener("mousedown", e => {
+    isDragging = true;
+    startX = e.pageX - timeline.offsetLeft;
+    scrollLeft = timeline.scrollLeft;
+    timeline.style.cursor = "grabbing";
+  });
 
-timeline.addEventListener("mouseup", () => {
-  isDragging = false;
-  timeline.style.cursor = "grab";
-});
+  timeline.addEventListener("mouseleave", () => {
+    isDragging = false;
+    timeline.style.cursor = "grab";
+  });
 
-timeline.addEventListener("mousemove", e => {
-  if(!isDragging) return;
-  const x = e.pageX - startX;
-  const walk = x * 2; // adjust drag speed
-  timeline.scrollLeft = scrollLeft - walk;
-});
+  timeline.addEventListener("mouseup", () => {
+    isDragging = false;
+    timeline.style.cursor = "grab";
+  });
 
-// Touch events for mobile
-timeline.addEventListener("touchstart", e => {
-  isDragging = true;
-  startX = e.touches[0].pageX - timeline.offsetLeft;
-  scrollLeft = timeline.scrollLeft;
-});
+  timeline.addEventListener("mousemove", e => {
+    if (!isDragging) return;
+    const x = e.pageX - startX;
+    const walk = x * 2; // drag speed
+    timeline.scrollLeft = scrollLeft - walk;
+  });
 
-timeline.addEventListener("touchend", () => {
-  isDragging = false;
-});
+  // Touch drag for tablets
+  timeline.addEventListener("touchstart", e => {
+    isDragging = true;
+    startX = e.touches[0].pageX - timeline.offsetLeft;
+    scrollLeft = timeline.scrollLeft;
+  });
 
-timeline.addEventListener("touchmove", e => {
-  if(!isDragging) return;
-  const x = e.touches[0].pageX - startX;
-  const walk = x * 2;
-  timeline.scrollLeft = scrollLeft - walk;
-});
+  timeline.addEventListener("touchmove", e => {
+    if (!isDragging) return;
+    const x = e.touches[0].pageX - startX;
+    const walk = x * 2;
+    timeline.scrollLeft = scrollLeft - walk;
+  });
+
+  timeline.addEventListener("touchend", () => {
+    isDragging = false;
+  });
+}
