@@ -480,4 +480,90 @@ nav a:hover {
   text-shadow: 0 0 15px rgba(255,44,44,0.5);
 }
 
+/* ============================= */
+/* CINEMATIC TIMELINE SECTION */
+/* ============================= */
+
+.cinematic-timeline {
+  text-align: center;
+  padding: 140px 10vw;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.timeline-vertical {
+  margin-top: 80px;
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+  position: relative;
+}
+
+/* Vertical Line */
+.timeline-vertical::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%);
+  width: 2px;
+  height: 100%;
+  background: rgba(255,255,255,0.1);
+}
+
+.timeline-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+/* Year */
+.timeline-year {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: -25px;
+  font-size: 14px;
+  letter-spacing: 3px;
+  color: #ff2c2c;
+}
+
+/* Card */
+.timeline-card {
+  width: 400px;
+  padding: 30px;
+  background: rgba(255,255,255,0.05);
+  border-radius: 20px;
+  backdrop-filter: blur(8px);
+  transition: 0.4s ease;
+  cursor: pointer;
+}
+
+.timeline-card h3 {
+  margin-bottom: 10px;
+}
+
+.timeline-card p {
+  color: rgba(255,255,255,0.6);
+  font-size: 14px;
+}
+
+/* Hover Glow */
+.timeline-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 0 30px rgba(255,44,44,0.4);
+}
+
+/* Hide Extra Info */
+.extra-info {
+  max-height: 0;
+  overflow: hidden;
+  transition: 0.4s ease;
+}
+
+.timeline-card.active .extra-info {
+  max-height: 200px;
+  margin-top: 15px;
+}
 
