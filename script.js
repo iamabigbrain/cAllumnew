@@ -1,178 +1,71 @@
 document.addEventListener("DOMContentLoaded", function () {
 
-  // ====================================
-  // REGISTER GSAP
-  // ====================================
   gsap.registerPlugin(ScrollTrigger);
 
+  // HERO IMAGE PULL
+  const heroImage = document.querySelector(".hero-left img");
 
-  // ====================================
-  // HEADER DROP + FADE IN
-  // ====================================
+  document.addEventListener("mousemove", e => {
+    const x = (e.clientX - window.innerWidth / 2) / 25;
+    const y = (e.clientY - window.innerHeight / 2) / 25;
+
+    gsap.to(heroImage, {
+      x: x,
+      y: y,
+      duration: 0.6,
+      ease: "power3.out"
+    });
+  });
+
+  // HEADER LOAD ANIMATION
   gsap.from("header", {
     y: -80,
     opacity: 0,
-    duration: 1,
-    ease: "power3.out"
+    duration: 1
   });
 
-
-  // ====================================
-  // HERO IMAGE FADE IN
-  // ====================================
   gsap.from(".hero-left img", {
     opacity: 0,
-    scale: 0.9,
-    duration: 1.2,
-    delay: 0.3,
-    ease: "power3.out"
+    duration: 1.5
   });
 
-
-  // ====================================
-  // HERO TEXT FADE IN (STAGGERED)
-  // ====================================
-  gsap.from(".hero-right h1", {
-    opacity: 0,
-    y: 40,
-    duration: 1,
-    delay: 0.5,
-    ease: "power3.out"
-  });
-
-  gsap.from(".fade-line", {
-    opacity: 0,
-    y: 30,
-    duration: 1,
+  gsap.to(".fade-line", {
+    opacity: 1,
+    y: 0,
     stagger: 0.3,
-    delay: 0.8,
-    ease: "power3.out"
+    duration: 1,
+    delay: 0.5
   });
 
-
-  // ====================================
-  // HERO IMAGE MOUSE PULL (TOWARDS MOUSE)
-  // ====================================
-  const heroImage = document.querySelector(".hero-left img");
-
-  if (heroImage) {
-    document.addEventListener("mousemove", e => {
-
-      const x = (e.clientX - window.innerWidth / 3) / 25;
-      const y = (e.clientY - window.innerHeight / 3) / 25;
-
-      gsap.to(heroImage, {
-        x: x,
-        y: y,
-        duration: 0.6,
-        ease: "power3.out"
-      });
-
-    });
-  }
-
-
-  // ====================================
-  // HERO FADE OUT ON SCROLL
-  // ====================================
-  gsap.to(".hero", {
-    scrollTrigger: {
-      trigger: ".hero",
-      start: "top top",
-      end: "bottom top",
-      scrub: true
-    },
-    opacity: 0
-  });
-
-
-  // ====================================
-  // SECTION FADE IN ON SCROLL
-  // ====================================
+  // SECTION FADE IN
   gsap.utils.toArray(".section").forEach(section => {
-
-    gsap.fromTo(section,
-      {
-        opacity: 0,
-        y: 80
-      },
-      {
-        opacity: 1,
-        y: 0,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: section,
-          start: "top 80%",
-          end: "top 40%",
-          scrub: true
-        }
+    gsap.from(section, {
+      opacity: 0,
+      y: 80,
+      duration: 1,
+      scrollTrigger: {
+        trigger: section,
+        start: "top 80%"
       }
-    );
-
+    });
   });
 
-
-  // ====================================
-  // PROJECT EXPAND ON CLICK
-  // ====================================
+  // PROJECT EXPAND
   document.querySelectorAll(".project").forEach(card => {
-
     card.addEventListener("click", () => {
-
-      document.querySelectorAll(".project").forEach(c => {
-        if (c !== card) c.classList.remove("expanded");
-      });
-
-      card.classList.toggle("expanded");
-
+      const extra = card.querySelector(".extra-info");
+      extra.style.display =
+        extra.style.display === "block" ? "none" : "block";
     });
-
   });
 
-
-  // ====================================
-  // TIMELINE EXPAND ON CLICK
-  // ====================================
-  document.querySelectorAll(".milestone").forEach(milestone => {
-
-    milestone.addEventListener("click", () => {
-
-      document.querySelectorAll(".milestone").forEach(m => {
-        if (m !== milestone) m.classList.remove("expanded");
-      });
-
-      milestone.classList.toggle("expanded");
-
+  // TIMELINE EXPAND
+  document.querySelectorAll(".milestone").forEach(item => {
+    item.addEventListener("click", () => {
+      const extra = item.querySelector(".extra-info");
+      extra.style.display =
+        extra.style.display === "block" ? "none" : "block";
     });
-
-  });
-
-
-  // ====================================
-  // SMOOTH NAV SCROLL (FIXED HEADER OFFSET)
-  // ====================================
-  document.querySelectorAll("nav a").forEach(link => {
-
-    link.addEventListener("click", e => {
-      e.preventDefault();
-
-      const target = document.querySelector(link.getAttribute("href"));
-
-      if (target) {
-
-        const headerOffset = 100;
-        const elementPosition = target.getBoundingClientRect().top;
-        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-
-        window.scrollTo({
-          top: offsetPosition,
-          behavior: "smooth"
-        });
-
-      }
-
-    });
-
   });
 
 });
