@@ -41,7 +41,7 @@ nav a {
 }
 
 nav a:hover {
-  color: #ff2a2a; /* 🔥 RED instead of blue */
+  color: #ff2a2a; /* RED hover */
 }
 
 /* HERO */
@@ -53,8 +53,7 @@ nav a:hover {
   padding: 0 10vw;
 }
 
-.hero-left, 
-.hero-right {
+.hero-left, .hero-right {
   flex: 1;
 }
 
@@ -93,38 +92,37 @@ nav a:hover {
   backdrop-filter: blur(10px);
   border-radius: 20px;
   border: 1px solid rgba(255,255,255,0.08);
-
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   cursor: pointer;
 }
 
-.project:hover {
-  box-shadow: 0 20px 40px rgba(255, 0, 0, 0.35);
-}
-
 /* TIMELINE */
 .timeline {
-  overflow: hidden;
-  position: relative;
-  margin-top: 40px;
+  display: flex;
+  flex-direction: column; 
+  align-items: center;
+  gap: 40px;
+  padding-top: 40px;
 }
 
 .timeline-track {
   display: flex;
-  gap: 50px;
-  transition: transform 0.3s ease;
+  flex-direction: column; 
+  gap: 40px;
+  width: 100%;
+  max-width: 500px; 
 }
 
-/* TIMELINE CARDS (MATCH PROJECT STYLE) */
 .milestone {
-  min-width: 280px;
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+  margin: 0 auto;
   padding: 30px;
-
   background: rgba(255,255,255,0.05);
   backdrop-filter: blur(10px);
   border-radius: 20px;
   border: 1px solid rgba(255,255,255,0.08);
-
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   cursor: pointer;
 }
@@ -145,14 +143,7 @@ nav a:hover {
   opacity: 0.8;
 }
 
-.milestone:hover {
-  box-shadow: 0 20px 40px rgba(255, 0, 0, 0.4);
-}
-
-/* ============================= */
-/* CONTACT SECTION */
-/* ============================= */
-
+/* CONTACT */
 .contact-section {
   text-align: center;
 }
@@ -192,10 +183,7 @@ nav a:hover {
   box-shadow: 0 15px 35px rgba(255,0,0,0.5);
 }
 
-/* ============================= */
 /* MOBILE RESPONSIVE */
-/* ============================= */
-
 @media (max-width: 900px) {
 
   .hero {
@@ -214,7 +202,7 @@ nav a:hover {
   }
 
   nav {
-    display: none; /* hides nav on small screens for now */
+    display: none;
   }
 
   .section {
@@ -224,5 +212,4 @@ nav a:hover {
   .timeline-track {
     gap: 20px;
   }
-
 }
