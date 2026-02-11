@@ -5,10 +5,6 @@
   box-sizing: border-box;
 }
 
-html {
-  scroll-padding-top: 100px; /* prevents header overlap */
-}
-
 body {
   font-family: 'Poppins', sans-serif;
   background: #0f0f0f;
@@ -57,8 +53,7 @@ nav a:hover {
   padding: 0 10vw;
 }
 
-.hero-left,
-.hero-right {
+.hero-left, .hero-right {
   flex: 1;
 }
 
@@ -101,28 +96,42 @@ nav a:hover {
   cursor: pointer;
 }
 
+.project:hover {
+  box-shadow: 0 20px 40px rgba(255,0,0,0.35);
+}
+
+/* EXTRA INFO FOR PROJECTS / TIMELINE */
+.extra-info {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height 0.5s ease, opacity 0.5s ease;
+  margin-top: 15px;
+}
+
+.project.expanded .extra-info,
+.milestone.expanded .extra-info {
+  max-height: 300px; /* adjust for content */
+  opacity: 1;
+}
+
 /* TIMELINE */
 .timeline {
   display: flex;
   flex-direction: column;
   align-items: center;
-  text-align: center;
+  margin-top: 40px;
 }
 
 .timeline-track {
   display: flex;
-  flex-direction: column;
-  gap: 40px;
-  width: 100%;
-  max-width: 600px;
-  align-items: center;
+  flex-direction: column; /* vertical now */
+  gap: 30px;
 }
 
 /* TIMELINE CARDS */
 .milestone {
-  width: 80%;
-  max-width: 400px;
-  margin: 0 auto;
+  min-width: 280px;
   padding: 30px;
   background: rgba(255,255,255,0.05);
   backdrop-filter: blur(10px);
@@ -150,7 +159,6 @@ nav a:hover {
 
 .milestone:hover {
   box-shadow: 0 20px 40px rgba(255,0,0,0.4);
-  transform: scale(1.1);
 }
 
 /* CONTACT */
@@ -200,21 +208,13 @@ nav a:hover {
     text-align: center;
     padding-top: 120px;
   }
-
   .hero-left img {
     max-width: 300px;
     margin-bottom: 30px;
   }
-
   .hero-right h1 {
     font-size: 42px;
   }
-
-  nav {
-    display: none;
-  }
-
-  .section {
-    padding: 100px 6vw;
-  }
+  nav { display: none; }
+  .section { padding: 100px 6vw; }
 }
