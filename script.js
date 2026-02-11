@@ -38,22 +38,31 @@ document.addEventListener("DOMContentLoaded", function () {
   // ================================
   // SECTION FADE-IN
   // ================================
-  gsap.utils.toArray(".section").forEach(section => {
-    gsap.fromTo(section,
-      { opacity: 0, y: 80 },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 1,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: section,
-          start: "top 85%",
-          toggleActions: "play none none reverse"
-        }
+// ================================
+// SECTION FADE IN + OUT (SMOOTH)
+// ================================
+gsap.utils.toArray(".section").forEach(section => {
+
+  gsap.fromTo(section,
+    {
+      opacity: 0,
+      y: 80
+    },
+    {
+      opacity: 1,
+      y: 0,
+      ease: "power3.out",
+      scrollTrigger: {
+        trigger: section,
+        start: "top 80%",
+        end: "bottom 20%",
+        scrub: true
       }
-    );
-  });
+    }
+  );
+
+});
+
 
 
   // ================================
