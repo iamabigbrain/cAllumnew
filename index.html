@@ -2,121 +2,78 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>cAllumdev</title>
-
-  <!-- Google Fonts -->
+  <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
-
-  <!-- GSAP -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-<script src="script.js"></script>
-
-
+  <!-- CSS -->
   <link rel="stylesheet" href="style.css">
+  <!-- GSAP -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.14.0/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.14.0/ScrollTrigger.min.js"></script>
 </head>
-<body id="top">
+<body>
 
   <!-- HEADER -->
   <header>
     <div class="logo">CDOT</div>
     <nav>
-      <a href="#top" class="back-top">Top</a>
       <a href="#about">About Me</a>
       <a href="#projects">Projects</a>
       <a href="#timeline">Timeline</a>
-      <a href="#videos">Videos</a>
       <a href="#contact">Contact</a>
+      <a href="#top">Top</a>
     </nav>
   </header>
 
   <!-- HERO -->
-  <section class="hero">
+  <section class="hero" id="top">
     <div class="hero-left">
-      <img src="me.jpg" alt="Photo of Callum">
+      <img src="me.jpg" alt="Callum Dev">
     </div>
     <div class="hero-right">
       <h1>cAllumdev</h1>
       <p>Unity Game Developer</p>
       <p>Video Editor</p>
-      <p>Other Roles...</p>
+      <p>Content Creator</p>
     </div>
   </section>
 
-  <!-- ABOUT ME -->
-  <section id="about" class="section about">
-    <h2>Who I Am</h2>
-    <p>Short intro about yourself. Your passions, skills, and what you create.</p>
+  <!-- ABOUT -->
+  <section class="section" id="about">
+    <h2>About Me</h2>
+    <p>Hi! I'm Callum, a game developer and video editor. I love creating interactive experiences and cinematic content.</p>
   </section>
 
   <!-- PROJECTS -->
-  <section id="projects" class="section projects">
+  <section class="section" id="projects">
     <h2>Projects</h2>
-    <div class="project">
-      <h3>Project 1</h3>
-      <p>Description of project 1.</p>
-    </div>
-    <div class="project">
-      <h3>Project 2</h3>
-      <p>Description of project 2.</p>
-    </div>
+    <div class="project">Project 1</div>
+    <div class="project">Project 2</div>
+    <div class="project">Project 3</div>
   </section>
 
   <!-- TIMELINE -->
-  <section id="timeline" class="section timeline">
+  <section class="section" id="timeline">
     <h2>Timeline</h2>
-    <div class="timeline-track">
-      <div class="milestone">
-        <img src="timeline1.jpg" alt="2019">
-        <p>2019 - Started Coding</p>
-      </div>
-      <div class="milestone">
-        <img src="timeline2.jpg" alt="2020">
-        <p>2020 - First Game</p>
-      </div>
-      <div class="milestone">
-        <img src="timeline3.jpg" alt="2021">
-        <p>2021 - Video Editing</p>
-      </div>
-      <div class="milestone">
-        <img src="timeline4.jpg" alt="2022">
-        <p>2022 - Portfolio Launch</p>
-      </div>
-      <div class="milestone">
-        <img src="timeline5.jpg" alt="2023">
-        <p>2023 - Projects & Growth</p>
+    <div class="timeline">
+      <div class="timeline-track">
+        <div class="milestone">Started Game Dev</div>
+        <div class="milestone">Released First Project</div>
+        <div class="milestone">Learned Unity</div>
+        <div class="milestone">Started Editing Business</div>
+        <div class="milestone">Published Videos</div>
       </div>
     </div>
   </section>
 
-  <!-- VIDEOS -->
-  <section id="videos" class="section videos">
-    <h2>Videos</h2>
-    <p>Links or embeds of your video content.</p>
+  <!-- CONTACT -->
+  <section class="section contact" id="contact">
+    <h2>Contact / Promo</h2>
+    <video src="promo.mp4" controls></video>
+    <button onclick="window.location.href='https://callumdev.com'">Click Here</button>
   </section>
 
-  <!-- CONTACT -->
-  <section id="contact" class="section contact-section">
-
-  <h2>Work With Me</h2>
-
-  <div class="contact-content">
-
-    <video controls autoplay muted loop class="promo-video">
-      <source src="promo.mp4" type="video/mp4">
-      Your browser does not support video.
-    </video>
-
-    <a href="https://callumdev.com" target="_blank" class="contact-btn">
-      Click Here
-    </a>
-
-  </div>
-
-</section>
-
-
+  <!-- JS -->
   <script src="script.js"></script>
 </body>
 </html>
