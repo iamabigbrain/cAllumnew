@@ -582,3 +582,9 @@ nav a:hover {
   opacity: 1;
   margin-top: 15px;
 }
+
+.project-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
