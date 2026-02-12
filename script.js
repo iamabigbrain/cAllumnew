@@ -179,3 +179,19 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
 });
+
+const timelineCards = document.querySelectorAll(".timeline-card");
+
+timelineCards.forEach(card => {
+  card.addEventListener("click", () => {
+
+    timelineCards.forEach(other => {
+      if (other !== card) {
+        other.classList.remove("active");
+      }
+    });
+
+    card.classList.toggle("active");
+
+  });
+});
