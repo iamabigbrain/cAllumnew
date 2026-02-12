@@ -570,3 +570,15 @@ nav a:hover {
   margin-top: 15px;
 }
 
+.extra-info {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height 0.5s ease, opacity 0.3s ease, margin-top 0.3s ease;
+}
+
+.timeline-card.active .extra-info {
+  max-height: 400px;
+  opacity: 1;
+  margin-top: 15px;
+}
