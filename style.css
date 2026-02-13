@@ -639,6 +639,27 @@ nav a:hover {
   font-size: 14px;
 }
 
+/* Improve select dropdown appearance */
+.editor-form select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  cursor: pointer;
+
+  /* Custom arrow */
+  background-image: url("data:image/svg+xml;utf8,<svg fill='white' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  background-size: 16px;
+}
+
+/* Dark dropdown options */
+.editor-form select option {
+  background: #111;
+  color: white;
+}
+
+
 .editor-form input:focus,
 .editor-form select:focus,
 .editor-form textarea:focus {
