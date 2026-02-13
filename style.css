@@ -588,3 +588,71 @@ nav a:hover {
   color: inherit;
   display: block;
 }
+
+.editor-section {
+  min-height: 100vh;
+  padding: 140px 10vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.editor-container {
+  max-width: 700px;
+  width: 100%;
+}
+
+.editor-title {
+  font-size: 42px;
+  margin-bottom: 10px;
+}
+
+.editor-subtext {
+  margin-bottom: 40px;
+  opacity: 0.7;
+}
+
+.editor-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.editor-form label {
+  font-weight: 600;
+}
+
+.editor-form input,
+.editor-form select,
+.editor-form textarea {
+  padding: 14px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.1);
+  background: rgba(255,255,255,0.03);
+  color: white;
+  font-size: 14px;
+}
+
+.editor-form input:focus,
+.editor-form select:focus,
+.editor-form textarea:focus {
+  outline: none;
+  border-color: #ff2a2a;
+}
+
+.editor-submit {
+  margin-top: 20px;
+  padding: 15px;
+  border-radius: 40px;
+  border: none;
+  background: #ff2a2a;
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.editor-submit:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 30px rgba(255,42,42,0.4);
+}
