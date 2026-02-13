@@ -16,58 +16,90 @@
       serious inquiries only. fill out the form below and i’ll get back to you within 48 hours.
     </p>
 
-    <form class="editor-form">
+    <form action="https://formspree.io/f/xdalejkw" method="POST" class="editor-form">
 
-      <!-- Name -->
-      <label>Full Name</label>
-      <input type="text" name="name" required>
+  <!-- Contact Info -->
+  <label>Full Name</label>
+  <input type="text" name="name" required>
 
-      <!-- Email -->
-      <label>Email Address</label>
-      <input type="email" name="email" required>
+  <label>Email Address</label>
+  <input type="email" name="email" required>
 
-      <!-- Platform -->
-      <label>Main Platform</label>
-      <select name="platform" required>
-        <option value="">Select one</option>
-        <option>YouTube</option>
-        <option>TikTok</option>
-        <option>Instagram</option>
-        <option>Twitch</option>
-        <option>Other</option>
-      </select>
+  <label>Discord (if applicable)</label>
+  <input type="text" name="discord">
 
-      <!-- Content Type -->
-      <label>What type of content do you make?</label>
-      <input type="text" name="content_type" placeholder="Gaming, Vlogs, Shorts, etc." required>
+  <!-- Platform -->
+  <label>Main Platform</label>
+  <select name="platform" required>
+    <option value="">Select one</option>
+    <option>YouTube</option>
+    <option>TikTok</option>
+    <option>Instagram</option>
+    <option>Twitch</option>
+    <option>Other</option>
+  </select>
 
-      <!-- Editing Style -->
-      <label>Describe the editing style you're looking for</label>
-      <textarea name="style" rows="4" required></textarea>
+  <!-- Channel Link -->
+  <label>Channel / Profile Link</label>
+  <input type="url" name="channel_link" required>
 
-      <!-- Budget -->
-      <label>Monthly Budget (£)</label>
-      <select name="budget" required>
-        <option value="">Select range</option>
-        <option>£50–£100</option>
-        <option>£100–£250</option>
-        <option>£250–£500</option>
-        <option>£500+</option>
-      </select>
+  <!-- Content Type -->
+  <label>What type of content do you create?</label>
+  <input type="text" name="content_type" placeholder="Gaming, Commentary, Shorts, Vlogs..." required>
 
-      <!-- Message -->
-      <label>Anything else?</label>
-      <textarea name="extra" rows="3"></textarea>
+  <!-- Volume -->
+  <label>How many videos per month?</label>
+  <select name="volume" required>
+    <option value="">Select</option>
+    <option>1–2</option>
+    <option>3–5</option>
+    <option>6–10</option>
+    <option>10+</option>
+  </select>
 
-      <button type="submit" class="editor-submit">
-        Submit Application
-      </button>
+  <!-- Editing Style -->
+  <label>Describe the editing style you're looking for</label>
+  <textarea name="style" rows="4" required></textarea>
 
-    </form>
+  <!-- References -->
+  <label>Reference creators or videos (links)</label>
+  <textarea name="references" rows="3"></textarea>
 
-  </div>
+  <!-- Budget -->
+  <label>Monthly Budget (£)</label>
+  <select name="budget" required>
+    <option value="">Select range</option>
+    <option>£100–£250</option>
+    <option>£250–£500</option>
+    <option>£500–£1000</option>
+    <option>£1000+</option>
+  </select>
 
-</section>
+  <!-- Deadline -->
+  <label>Turnaround expectation</label>
+  <select name="turnaround" required>
+    <option value="">Select</option>
+    <option>24–48 hours</option>
+    <option>3–5 days</option>
+    <option>1 week</option>
+  </select>
 
-</body>
-</html>
+  <!-- Long Term -->
+  <label>Are you looking for long-term collaboration?</label>
+  <select name="long_term" required>
+    <option value="">Select</option>
+    <option>Yes</option>
+    <option>No</option>
+    <option>Maybe</option>
+  </select>
+
+  <!-- Extra -->
+  <label>Anything else?</label>
+  <textarea name="extra" rows="3"></textarea>
+
+  <button type="submit" class="editor-submit">
+    Submit Application
+  </button>
+
+</form>
+
