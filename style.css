@@ -591,32 +591,38 @@ nav a:hover {
 
 .editor-section {
   min-height: 100vh;
-  padding: 140px 10vw;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: center;   /* horizontal center */
+  align-items: center;       /* vertical center */
+  padding: 120px 20px;
+  text-align: center;
 }
 
+
 .editor-container {
-  max-width: 700px;
   width: 100%;
+  max-width: 700px;
 }
+
 
 .editor-title {
   font-size: 42px;
   margin-bottom: 10px;
+  text-transform: lowercase;
 }
 
 .editor-subtext {
-  margin-bottom: 40px;
   opacity: 0.7;
+  margin-bottom: 40px;
 }
 
 .editor-form {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 18px;
+  text-align: left; /* keeps form readable */
 }
+
 
 .editor-form label {
   font-weight: 600;
@@ -650,6 +656,8 @@ nav a:hover {
   font-weight: 700;
   cursor: pointer;
   transition: 0.3s ease;
+  align-self: center;
+  width: 220px;
 }
 
 .editor-submit:hover {
