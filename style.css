@@ -76,47 +76,6 @@ nav a:hover {
   margin-bottom: 12px;
 }
 
-/* iPhone / small phones only */
-@media (max-width: 900px) {
-
-  .hero {
-    flex-direction: column;
-    justify-content: center;
-    text-align: center;
-    padding-top: 120px;
-  }
-
-  .hero-left,
-  .hero-right {
-    flex: none;         /* remove flex:1 ONLY on phones */
-    width: 100%;
-  }
-
-  .hero-left {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 30px;
-  }
-
-  .hero-left img {
-    width: 100%;
-    max-width: 420px;   /* keeps it large, not tiny */
-  }
-
-  .hero-right {
-    align-items: center;
-  }
-
-  .hero-right h1 {
-    font-size: 48px;
-  }
-
-  .hero-right p {
-    font-size: 18px;
-  }
-
-}
-
 
 /* SECTIONS */
 .section {
@@ -726,4 +685,47 @@ nav a:hover {
 .editor-submit:hover {
   transform: scale(1.05);
   box-shadow: 0 10px 30px rgba(255,42,42,0.4);
+}
+
+/* MOBILE HERO FIX — PHONES ONLY */
+@media screen and (max-width: 600px) {
+
+  .hero {
+    display: flex;
+    flex-direction: column !important; /* force vertical */
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding-top: 120px;
+  }
+
+  .hero-left,
+  .hero-right {
+    flex: none !important;
+    width: 100%;
+  }
+
+  .hero-left {
+    order: 1;              /* image first */
+    margin-bottom: 30px;
+  }
+
+  .hero-right {
+    order: 2;              /* text second */
+    align-items: center;
+  }
+
+  .hero-left img {
+    width: 90%;
+    max-width: 420px;
+  }
+
+  .hero-right h1 {
+    font-size: 48px;
+  }
+
+  .hero-right p {
+    font-size: 18px;
+  }
+
 }
