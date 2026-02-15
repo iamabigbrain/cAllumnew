@@ -77,7 +77,7 @@ nav a:hover {
 }
 
 /* iPhone / small phones only */
-@media (max-width: 600px) {
+@media (max-width: 900px) {
 
   .hero {
     flex-direction: column;
