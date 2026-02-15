@@ -76,20 +76,47 @@ nav a:hover {
   margin-bottom: 12px;
 }
 
-@media (max-width: 900px) {
+/* iPhone / small phones only */
+@media (max-width: 600px) {
+
+  .hero {
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    padding-top: 120px;
+  }
 
   .hero-left,
   .hero-right {
-    flex: unset;        /* remove flex:1 */
+    flex: none;         /* remove flex:1 ONLY on phones */
     width: 100%;
+  }
+
+  .hero-left {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
   }
 
   .hero-left img {
     width: 100%;
-    max-width: 380px;   /* adjust this if you want it bigger */
+    max-width: 420px;   /* keeps it large, not tiny */
+  }
+
+  .hero-right {
+    align-items: center;
+  }
+
+  .hero-right h1 {
+    font-size: 48px;
+  }
+
+  .hero-right p {
+    font-size: 18px;
   }
 
 }
+
 
   .hero-left img {
     max-width: 320px;            /* smaller on mobile */
