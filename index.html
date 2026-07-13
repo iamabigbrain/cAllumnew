@@ -217,6 +217,7 @@
     position:relative; aspect-ratio:16/10; overflow:hidden; background:#000;
   }
   .card.tall .card-media{aspect-ratio:4/5;}
+  .card.portrait-video .card-media{aspect-ratio:9/16;}
   .card-media video, .card-media img{
     width:100%; height:100%; object-fit:cover; display:block;
     filter:grayscale(0.35) contrast(1.05);
@@ -397,7 +398,7 @@ const PROJECTS = [
     title: "Kicks — Final Main Animation",
     category: "blender",
     tagLabel: "Blender — Animation",
-    size: "wide",
+    size: "portrait-video",
     desc: "Main animation piece — full render.",
     media: { type: "video", src: "videos/kicks-final-main-animation.mp4" }
   },
@@ -405,7 +406,7 @@ const PROJECTS = [
     title: "Kicks — Intro",
     category: "blender",
     tagLabel: "Blender — Animation",
-    size: "",
+    size: "portrait-video",
     desc: "Intro sequence for the Kicks project.",
     media: { type: "video", src: "videos/kicks-final-intro.mp4" }
   },
@@ -413,7 +414,7 @@ const PROJECTS = [
     title: "Hard Hat — Character Select",
     category: "blender",
     tagLabel: "Blender — Character",
-    size: "",
+    size: "portrait-video",
     desc: "Character select sequence, Hard Hat project.",
     media: { type: "video", src: "videos/hard-hat-character-select.mp4" }
   },
@@ -421,7 +422,7 @@ const PROJECTS = [
     title: "Hard Hat — Short Animation Render",
     category: "blender",
     tagLabel: "Blender — Animation",
-    size: "tall",
+    size: "portrait-video",
     desc: "Short-form render from the Hard Hat project.",
     media: { type: "video", src: "videos/hard-hat-short-anim-render.mp4" }
   }
