@@ -354,9 +354,9 @@
   <div class="logo">cAllum</div>
   <nav>
     <ul>
-      <li><a href="work">Work</a></li>
-      <li><a href="skills">Skills</a></li>
-      <li><a href="contact">Contact</a></li>
+      <li><a href="#" data-scroll="work">Work</a></li>
+      <li><a href="#" data-scroll="skills">Skills</a></li>
+      <li><a href="#" data-scroll="contact">Contact</a></li>
     </ul>
   </nav>
 </header>
@@ -720,6 +720,24 @@ function draw(){
   requestAnimationFrame(draw);
 }
 draw();
+
+document.querySelectorAll('[data-scroll]').forEach(link => {
+  link.addEventListener('click', e => {
+    e.preventDefault();
+
+    const target = document.getElementById(link.dataset.scroll);
+
+    if(target){
+      target.scrollIntoView({
+        behavior: 'smooth'
+      });
+
+      history.replaceState(null, null, window.location.pathname);
+    }
+  });
+});
 </script>
 </body>
 </html>
+
+
