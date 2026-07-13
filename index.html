@@ -1,376 +1,694 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" type="image/png" href="icon.png">
-  <title>cAllumdev</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Callum — Technical Artist / Motion / Tools</title>
+<meta name="description" content="Callum — shader & technical art, motion design, Blender tools.">
+<style>
+  :root{
+    --ink:#0b0b0d;
+    --ink-2:#141416;
+    --paper:#f2ede3;
+    --paper-dim:#c2b8d4;
+    --paper-dark:#0b0b0d;
+    --accent-c:#3fd6e0;
+    --accent-m:#ff3f6e;
+    --line:#2a2a2d;
+    --hero-bg:#1c1730;      /* deep indigo */
+    --work-bg:#0f2321;      /* deep teal-black */
+    --skills-bg:#2b0f14;    /* deep maroon */
+    --contact-bg:#241a06;   /* deep gold-black */
+    --font-display: 'Neue', 'Helvetica Neue', Arial, sans-serif;
+    --font-mono: 'IBM Plex Mono', 'Courier New', monospace;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--ink);
+    color:var(--paper);
+    font-family:var(--font-display);
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+  ::selection{background:var(--accent-c); color:var(--ink);}
 
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+  /* each section is a bold flat field — print-zine block color, not a gradient */
+  .hero{ background:var(--hero-bg); }
+  #work{ background:var(--work-bg); }
+  #skills{ background:var(--skills-bg); }
+  #contact{ background:var(--contact-bg); }
 
-  <!-- GSAP -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  a{color:inherit; text-decoration:none;}
 
-  <!-- CSS -->
-  <link rel="stylesheet" href="style.css">
+  .noise{
+    position:fixed; inset:0; pointer-events:none; z-index:100;
+    opacity:0.035; mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* ---------- GLOBAL CURSOR GLOW (site-wide duotone bleed) ---------- */
+  #cursor-glow{
+    position:fixed; top:0; left:0; z-index:5; pointer-events:none;
+    width:900px; height:900px; margin:-450px 0 0 -450px;
+    background:radial-gradient(circle,
+      rgba(63,214,224,0.14) 0%,
+      rgba(255,63,110,0.09) 32%,
+      transparent 65%);
+    mix-blend-mode:screen;
+    transition:opacity .4s ease;
+    opacity:0;
+    will-change:transform;
+  }
+  #cursor-glow.active{opacity:1;}
+
+  /* ---------- CUSTOM CURSOR ---------- */
+  #custom-cursor{
+    position:fixed; top:0; left:0; z-index:200; pointer-events:none;
+    width:10px; height:10px; border-radius:50%; background:var(--accent-c);
+    transform:translate(-50%,-50%);
+    transition:width .25s ease, height .25s ease, background .25s ease, opacity .25s ease;
+    mix-blend-mode:difference;
+  }
+  #custom-cursor.hover{ width:48px; height:48px; background:var(--accent-m); }
+  @media (hover:none){ #custom-cursor{ display:none; } }
+
+  /* ---------- NAV ---------- */
+  header{
+    position:fixed; top:0; left:0; right:0; z-index:50;
+    display:flex; justify-content:space-between; align-items:center;
+    padding:28px 5vw;
+    mix-blend-mode:difference;
+  }
+  .logo{
+    font-family:var(--font-mono); font-size:14px; letter-spacing:0.15em; text-transform:uppercase;
+  }
+  nav ul{list-style:none; display:flex; gap:32px;}
+  nav a{
+    font-family:var(--font-mono); font-size:12px; letter-spacing:0.1em; text-transform:uppercase;
+    position:relative; opacity:0.8; transition:opacity .3s;
+  }
+  nav a:hover{opacity:1;}
+  nav a::after{
+    content:''; position:absolute; left:0; bottom:-4px; width:0; height:1px; background:var(--paper);
+    transition:width .3s ease;
+  }
+  nav a:hover::after{width:100%;}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative; height:100svh; min-height:640px;
+    display:flex; flex-direction:column; justify-content:flex-end;
+    padding:0 5vw 8vw;
+    overflow:hidden;
+  }
+  #halftone-canvas{
+    position:absolute; inset:0; width:100%; height:100%; z-index:0;
+    opacity:0.9;
+  }
+  .hero-inner{position:relative; z-index:2;}
+  .eyebrow{
+    font-family:var(--font-mono); font-size:12px; letter-spacing:0.25em; text-transform:uppercase;
+    color:var(--accent-c);
+    margin-bottom:18px;
+    opacity:0; transform:translateY(12px);
+    animation:riseIn .9s cubic-bezier(.2,.8,.2,1) .1s forwards;
+  }
+  h1.hero-title{
+    font-size:clamp(2.6rem, 8vw, 7.2rem);
+    line-height:0.92;
+    font-weight:800;
+    letter-spacing:-0.02em;
+    text-transform:uppercase;
+    max-width:14ch;
+  }
+  h1.hero-title span{
+    display:block;
+    opacity:0; transform:translateY(40px);
+    animation:riseIn 1s cubic-bezier(.2,.8,.2,1) forwards;
+  }
+  h1.hero-title span:nth-child(1){animation-delay:.15s;}
+  h1.hero-title span:nth-child(2){
+    background:linear-gradient(100deg, var(--paper) 0%, var(--accent-c) 45%, var(--accent-m) 100%);
+    background-size:220% 100%;
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+    animation:riseIn 1s cubic-bezier(.2,.8,.2,1) .28s forwards, gradientDrift 6s ease-in-out 1.2s infinite;
+  }
+  @keyframes gradientDrift{
+    0%,100%{background-position:0% 50%;}
+    50%{background-position:100% 50%;}
+  }
+  .hero-sub{
+    margin-top:24px; max-width:46ch;
+    font-size:clamp(1rem,1.4vw,1.15rem);
+    color:var(--paper-dim);
+    opacity:0; transform:translateY(20px);
+    animation:riseIn .9s cubic-bezier(.2,.8,.2,1) .5s forwards;
+  }
+  .scroll-cue{
+    position:absolute; right:5vw; bottom:6vw; z-index:2;
+    font-family:var(--font-mono); font-size:11px; letter-spacing:0.15em; text-transform:uppercase;
+    display:flex; align-items:center; gap:10px; color:var(--paper-dim);
+    opacity:0; animation:riseIn .9s ease .9s forwards;
+  }
+  .scroll-cue .bar{width:1px; height:36px; background:var(--paper-dim); position:relative; overflow:hidden;}
+  .scroll-cue .bar::after{
+    content:''; position:absolute; top:-100%; left:0; width:100%; height:100%;
+    background:var(--accent-c); animation:scrollDrip 1.8s ease-in-out infinite;
+  }
+  @keyframes scrollDrip{ 0%{top:-100%;} 60%{top:100%;} 100%{top:100%;} }
+  @keyframes riseIn{ to{opacity:1; transform:translateY(0);} }
+
+  /* ---------- SECTION SHELL ---------- */
+  section{padding:14vh 5vw; position:relative; scroll-margin-top:90px;}
+  /* color-bleed divider between sections — a thin gradient seam, not a plain line */
+  section::before{
+    content:''; position:absolute; top:0; left:5vw; right:5vw; height:1px;
+    background:linear-gradient(90deg, transparent, var(--accent-c), var(--accent-m), transparent);
+    opacity:0.35;
+  }
+  section:first-of-type::before{display:none;}
+  .section-head{
+    display:flex; justify-content:space-between; align-items:flex-end;
+    margin-bottom:6vh; border-bottom:1px solid var(--line); padding-bottom:24px;
+    flex-wrap:wrap; gap:16px;
+  }
+  .section-head h2{
+    font-size:clamp(1.8rem,4vw,3.2rem); text-transform:uppercase; letter-spacing:-0.01em; font-weight:800;
+  }
+  .section-tag{
+    font-family:var(--font-mono); font-size:12px; letter-spacing:0.15em; text-transform:uppercase; color:var(--paper-dim);
+  }
+
+  .reveal{opacity:0; transform:translateY(36px); transition:opacity .8s cubic-bezier(.2,.8,.2,1), transform .8s cubic-bezier(.2,.8,.2,1);}
+  .reveal.in{opacity:1; transform:translateY(0);}
+
+  /* ---------- FILTER ---------- */
+  .filters{display:flex; gap:10px; margin-bottom:5vh; flex-wrap:wrap;}
+  .filter-btn{
+    font-family:var(--font-mono); font-size:11px; letter-spacing:0.1em; text-transform:uppercase;
+    padding:9px 18px; border:1px solid var(--line); border-radius:999px; color:var(--paper-dim);
+    cursor:pointer; background:transparent; transition:all .25s;
+  }
+  .filter-btn:hover{border-color:var(--paper);color:var(--paper);}
+  .filter-btn.active{background:var(--paper); color:var(--ink); border-color:var(--paper);}
+
+  /* ---------- WORK GRID ---------- */
+  .grid{
+    display:grid; grid-template-columns:repeat(12,1fr); gap:24px;
+  }
+  .card{
+    grid-column:span 6;
+    position:relative; border:1px solid var(--line); overflow:hidden; cursor:pointer;
+    background:var(--ink-2);
+    transition:border-color .4s ease, box-shadow .4s ease, transform .12s ease-out;
+  }
+  .card:hover{
+    border-color:var(--accent-c);
+    box-shadow:0 0 0 1px var(--accent-c), 0 24px 60px -20px rgba(63,214,224,0.35), 0 24px 60px -30px rgba(255,63,110,0.25);
+    transform:translateY(-4px);
+  }
+  .card.wide{grid-column:span 8;}
+  .card.tall{grid-column:span 4;}
+  @media (max-width:900px){
+    .card, .card.wide, .card.tall{grid-column:span 12;}
+  }
+  .card-media{
+    position:relative; aspect-ratio:16/10; overflow:hidden; background:#000;
+  }
+  .card.tall .card-media{aspect-ratio:4/5;}
+  .card-media video, .card-media img{
+    width:100%; height:100%; object-fit:cover; display:block;
+    filter:grayscale(0.35) contrast(1.05);
+    transition:filter .5s ease;
+  }
+  .card:hover .card-media video, .card:hover .card-media img{
+    filter:grayscale(0) contrast(1.1);
+  }
+  .card-media .media-placeholder{
+    position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+    font-family:var(--font-mono); font-size:11px; letter-spacing:0.1em; text-transform:uppercase;
+    color:var(--paper-dim); text-align:center; padding:20px;
+    background:
+      repeating-linear-gradient(45deg, var(--ink-2) 0 2px, transparent 2px 14px);
+  }
+  .card-media .halftone-overlay{
+    position:absolute; inset:0; opacity:0; transition:opacity .4s ease;
+    background-image: radial-gradient(circle, var(--accent-c) 1px, transparent 1.4px);
+    background-size:6px 6px; mix-blend-mode:screen;
+  }
+  .card:hover .halftone-overlay{opacity:0.25;}
+
+  .play-btn{
+    position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+    width:64px; height:64px; border-radius:50%;
+    background:rgba(11,11,13,0.55); backdrop-filter:blur(6px);
+    border:1px solid var(--accent-c);
+    display:flex; align-items:center; justify-content:center;
+    font-size:20px; color:var(--paper); pointer-events:none;
+    transition:transform .3s ease, background .3s ease;
+  }
+  .card:hover .play-btn{ transform:translate(-50%,-50%) scale(1.12); background:rgba(63,214,224,0.25); }
+  .card-info{
+    display:flex; justify-content:space-between; align-items:center;
+    padding:18px 20px; border-top:1px solid var(--line);
+  }
+  .card-info h3{font-size:1rem; font-weight:700; text-transform:uppercase; letter-spacing:0.01em;}
+  .card-info .tag{
+    font-family:var(--font-mono); font-size:10px; letter-spacing:0.1em; text-transform:uppercase; color:var(--accent-c);
+  }
+
+  /* ---------- SKILLS ---------- */
+  .skills-list{list-style:none; border-top:1px solid var(--line);}
+  .skills-list li{
+    display:flex; justify-content:space-between; align-items:center;
+    padding:22px 0; border-bottom:1px solid var(--line);
+    font-size:clamp(1.2rem,2.6vw,2rem); text-transform:uppercase; font-weight:700;
+    transition:padding-left .3s ease;
+  }
+  .skills-list li:hover{padding-left:16px; color:var(--accent-c);}
+  .skills-list li:nth-child(even):hover{color:var(--accent-m);}
+  .skills-list li span{
+    font-family:var(--font-mono); font-size:12px; letter-spacing:0.1em; color:var(--paper-dim); text-transform:none; font-weight:400;
+  }
+
+  /* ---------- CONTACT ---------- */
+  .contact{
+    display:flex; flex-direction:column; align-items:flex-start; gap:28px;
+  }
+  .contact h2{
+    font-size:clamp(2.2rem,7vw,5.5rem); text-transform:uppercase; font-weight:800; line-height:0.95; max-width:16ch;
+  }
+  .contact-link{
+    font-family:var(--font-mono); font-size:14px; letter-spacing:0.05em;
+    display:inline-flex; align-items:center; gap:12px; padding:16px 26px;
+    border:1px solid var(--paper); border-radius:999px;
+    transition:background .3s, color .3s;
+  }
+  .contact-link:hover{background:var(--paper); color:var(--ink);}
+  footer{
+    padding:30px 5vw; display:flex; justify-content:space-between;
+    font-family:var(--font-mono); font-size:11px; color:var(--paper-dim);
+    border-top:1px solid var(--line); flex-wrap:wrap; gap:10px;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important;}
+  }
+</style>
 </head>
-<body id="top">
+<body>
 
-  <!-- HEADER -->
-  <header>
-    <div class="logo">CDOT</div>
-    <nav>
-      <a href="#top">cAllum</a>
-      <a href="#about">about me</a>
-      <a href="#projects">projects</a>
-      <a href="#timeline">timeline</a>
-      <a href="#videos">videos</a>
-    </nav>
-  </header>
+<div class="noise"></div>
+<div id="cursor-glow"></div>
+<div id="custom-cursor"></div>
 
-  <!-- HERO -->
-  <section class="hero">
-    <div class="hero-left">
-      <img src="me.jpg" alt="Photo of Callum">
-    </div>
-    <div class="hero-right">
-  <h1>cAllumdev</h1>
-    <p class="fade-line">game developer</p>
-    <p class="fade-line">video editor</p>
-    <p class="fade-line">learning more</p>
-</div>
-    </div>
-  </section>
+<header>
+  <div class="logo">CALLUM</div>
+  <nav>
+    <ul>
+      <li><a href="#work">Work</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+</header>
 
-  <!-- ABOUT ME -->
-  <section id="about" class="section about cinematic-about">
-
-  <div class="about-content">
-
-    <h2 class="chapter-label">01.</h2>
-    <h1 class="cinematic-title">who i am</h1>
-
-    <p class="cinematic-subtext">
-      hey, i'm cAllum, i am a indie game developer who's trying to grow on social media. i want to show people what i make. i strive to make high-quality indie games that can be enjoyed by many.
-    </p>
-
-    <!-- STATS -->
-    <div class="cinematic-stats">
-
-      <div class="stat">
-        <h3>20K</h3>
-        <span>TOP VIDEO VIEWS</span>
-      </div>
-
-      <div class="stat">
-        <h3>600+</h3>
-        <span>SUBSCRIBERS</span>
-      </div>
-
-      <p class="cinematic-subtext">
-      i try make every video better than my last.
-
-    </div>
-
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <canvas id="halftone-canvas"></canvas>
+  <div class="hero-inner">
+    <div class="eyebrow">Game Developer — Video Editor</div>
+    <h1 class="hero-title">
+      <span>Callum</span>
+      <span>Dev</span>
+    </h1>
+    <p class="hero-sub">Indie game developer and video editor — Unity, After Effects, and a run of shipped projects with a real audience behind them.</p>
   </div>
-
+  <div class="scroll-cue"><span>Scroll</span><div class="bar"></div></div>
 </section>
 
-  <!-- PROJECTS -->
-  <section id="projects" class="section cinematic-projects">
-
-  <div class="projects-content">
-
-    <h2 class="chapter-label">02.</h2>
-    <h1 class="cinematic-title">projects</h1>
-
-    <p class="cinematic-subtext">
-      these are my BEST projects. more coming soon
-    </p>
-
-    <div class="project-grid">
-
-      <!-- PROJECT CARD 1 -->
-      <a href="https://bycallum.itch.io/the-follower-rewritten" target="_blank" class="project-link">
-        <div class="project-card">
-          <div class="project-image">
-            <img src="project1.jpg" alt="the follower: rewritten">
-          </div>
-          <div class="project-info">
-            <h3>the follower: rewritten</h3>
-            <p>is a recreation of my original game "the follower" that did the most success on my channel. i polished it and made the game feel more official instead of a small challenge with many bugs. from the reviews, people rate this as my best game (as of jan 2026)</p>
-          </div>
-        </div>
-      </a>
-
-      <!-- PROJECT CARD 2 -->
-      <a href="https://bycallum.itch.io/nextbot-mayhem" target="_blank" class="project-link">
-        <div class="project-card">
-          <div class="project-image">
-            <img src="project2.jpg" alt="nextbot mayhem">
-          </div>
-          <div class="project-info">
-            <h3>nextbot mayhem</h3>
-            <p>this is a very old project, but the overall reviews puts this as my top 2 projects due to amount of time i spent on it aligned with the theme of nextbots was extremely popular at the time. unfortunately this project is discontinued.</p>
-          </div>
-        </div>
-      </a>
-
-      <!-- PROJECT CARD 3 -->
-      <a href="https://gamejolt.com/games/zoned_out/856663" target="_blank" class="project-link">
-        <div class="project-card">
-          <div class="project-image">
-            <img src="project3.jpg" alt="zoned out">
-          </div>
-          <div class="project-info">
-            <h3>zoned out</h3>
-            <p>this is also a very old project, however the time, graphics and multiplayer in this project added effect. this was my first attempt of multiplayer, and lots of my friends enjoyed playing it. unfortunately this project was later discontinued.</p>
-          </div>
-        </div>
-      </a>
-
-      <!-- PROJECT CARD 4 -->
-      <a href="https://bycallum.itch.io/big-bills" target="_blank" class="project-link">
-        <div class="project-card">
-          <div class="project-image">
-            <img src="project4.jpg" alt="big bills">
-          </div>
-          <div class="project-info">
-            <h3>big bills</h3>
-            <p>although this was my first project, my community loved it and made it into memes begging for the next one to release. big bills 34 soon</p>
-          </div>
-        </div>
-      </a>
-
-    </div>
-
+<!-- ============ WORK ============ -->
+<section id="work">
+  <div class="section-head reveal">
+    <h2>Selected Work</h2>
+    <div class="section-tag">Animation — Shader / Technical Art — Tools</div>
   </div>
 
-</section>
-
-
-  <!-- TIMELINE -->
-  <section id="timeline" class="section cinematic-timeline">
-
-  <div class="timeline-content">
-
-    <h2 class="chapter-label">03.</h2>
-    <h1 class="cinematic-title">timeline</h1>
-
-    <p class="cinematic-subtext">
-      my journey through development, creativity, and growth.
-    </p>
-
-    <div class="timeline-vertical">
-
-      <!-- ITEM 1 -->
-      <div class="timeline-item">
-        <div class="timeline-year">2017</div>
-        <div class="timeline-card">
-          <h3>started scratch</h3>
-          <p class="short-info">discovered programming and fundamentals, began making basic scratch projects</p>
-          <div class="extra-info">
-            <p>
-              I downloaded scratch 2 and began working on small projects such as "football fish game" and short animation stories, by this time i was 8 years old so i wasnt THAT good.
-            </p>
-          </div>
-        </div>
-      </div>
-
-      <!-- ITEM 2 -->
-      <div class="timeline-item">
-        <div class="timeline-year">2019</div>
-        <div class="timeline-card">
-          <h3>introduced to roblox studio</h3>
-          <p class="short-info">i came across roblox studio, where i made small games that were never released</p>
-          <div class="extra-info">
-            <p>
-              when i started using roblox studio, i saw what code actually looked like and what it's like to work in a proper workspace and how difficult games are to make. this would be useful for unity in the future.
-            </p>
-          </div>
-        </div>
-      </div>
-
-      <!-- ITEM 3 -->
-      <div class="timeline-item">
-        <div class="timeline-year">2021</div>
-        <div class="timeline-card">
-          <h3>moved to unity</h3>
-          <p class="short-info">i used unity for the first time and started making an FPS game like karlson.</p>
-          <div class="extra-info">
-            <p>
-              unfortunately, this wasn't "Big Bills" and was a very basic test of how complicated it is to even make a basic character compared to roblox. some assets ended up being reused 2 years later.
-            </p>
-          </div>
-        </div>
-      </div>
-
-      <!-- ITEM 4 -->
-      <div class="timeline-item">
-        <div class="timeline-year">2022</div>
-        <div class="timeline-card">
-          <h3>began video editing</h3>
-          <p class="short-info">i started making connections and began using Davinci Resolve to edit videos.</p>
-          <div class="extra-info">
-            <p>
-              at this time, i was in the minecraft smp community where a lot of videos were being made and edited. i was one of these people and began learning how to edit from this time.
-            </p>
-          </div>
-        </div>
-      </div>
-
-      <!-- ITEM 5 -->
-      <div class="timeline-item">
-        <div class="timeline-year">2023</div>
-        <div class="timeline-card">
-          <h3>released my first game</h3>
-          <p class="short-info">i released big bills july 15th 2023 alongside videos</p>
-          <div class="extra-info">
-            <p>
-              this project was one of my longest projects as i was learning AI, scripting, modelling and how to use unity all at the same time. this began my journey.
-            </p>
-          </div>
-        </div>
-      </div>
-
-       <!-- ITEM 6 -->
-      <div class="timeline-item">
-        <div class="timeline-year">2024</div>
-        <div class="timeline-card">
-          <h3>went on a hiatus</h3>
-          <p class="short-info">due to school, i couldn't keep up with everything at once.</p>
-          <div class="extra-info">
-            <p>
-              because of this, i fell off HARD. but i want to change that and have a big comeback.
-            </p>
-          </div>
-        </div>
-      </div>
-      
-      <!-- ITEM 7 -->
-      <div class="timeline-item">
-        <div class="timeline-year">2026</div>
-        <div class="timeline-card">
-          <h3>the comeback</h3>
-          <p class="short-info">i finally uploaded, coming back with a new project</p>
-          <div class="extra-info">
-            <p>
-              fun fact, when making my comeback video i was using After Effects for the first time when creating the motion graphics. i had been working on that video since november 2025.
-            </p>
-          </div>
-        </div>
-      </div>
-
-      <!-- ITEM 8 -->
-      <div class="timeline-item">
-        <div class="timeline-year">NOW</div>
-        <div class="timeline-card">
-          <h3>enjoying life</h3>
-          <p class="short-info">and planning my next projects</p>
-          <div class="extra-info">
-            <p>
-              COMING SOON
-            </p>
-          </div>
-        </div>
-      </div>
-
-    </div>
-
+  <div class="filters reveal">
+    <button class="filter-btn active" data-filter="all">All</button>
+    <button class="filter-btn" data-filter="games">Games</button>
+    <button class="filter-btn" data-filter="blender">Blender</button>
   </div>
 
+  <div class="grid" id="work-grid"></div>
 </section>
 
-
-  <!-- VIDEOS -->
-  <section id="videos" class="section cinematic-videos">
-
-  <div class="videos-content">
-
-    <h2 class="chapter-label">04.</h2>
-    <h1 class="cinematic-title">featured videos</h1>
-
-    <p class="cinematic-subtext">
-      a collection of my videos and work.
-    </p>
-
-    <div class="video-grid">
-
-      <!-- VIDEO CARD 1 -->
-      <div class="video-card">
-        <div class="video-wrapper">
-          <iframe 
-            src="https://www.youtube.com/embed/hcpLtcSfOns?si=mgTgY2Sm9m3b44sF"
-            title="I quit game dev, here's why I came back"
-            frameborder="0"
-            allowfullscreen>
-          </iframe>
-        </div>
-        <div class="video-info">
-          <h3>I quit game dev, here's why I came back</h3>
-          <p>this was my comeback video, where i now continue to make quality content.</p>
-        </div>
-      </div>
-
-      <!-- VIDEO CARD 2 -->
-      <div class="video-card">
-        <div class="video-wrapper">
-          <iframe 
-            src="https://www.youtube.com/embed/AIq0L6NwtFk?si=QusDEzYkRdgZguxp"
-            title="1 Year of Game Development in Unity"
-            frameborder="0"
-            allowfullscreen>
-          </iframe>
-        </div>
-        <div class="video-info">
-          <h3>1 Year of Game Development in Unity</h3>
-          <p>i wanted to make a recap of my last year learning unity on my channel and what i had learnt. unfortunately this was around the time i had to stop uploading due to exams/school</p>
-        </div>
-      </div>
-
-      <!-- VIDEO CARD 3 -->
-      <div class="video-card">
-        <div class="video-wrapper">
-          <iframe 
-            src="https://www.youtube.com/embed/h3G8gw2_COk?si=NVPKyBar962IEj40"
-            title="Making a Horror Game in 2 Weeks"
-            frameborder="0"
-            allowfullscreen>
-          </iframe>
-        </div>
-        <div class="video-info">
-          <h3>Making a Horror Game in 2 Weeks</h3>
-          <p>this was my most popular video by far, this small challenge helped me gain a majority of my audience.</p>
-        </div>
-      </div>
-
-      <!-- VIDEO CARD 4 -->
-      <div class="video-card">
-        <div class="video-wrapper">
-          <iframe 
-            src="https://www.youtube.com/embed/vWagsejD00Y?si=-lC54A7jdOnsQ5-8"
-            title="Nico Nextbots was DOWN! So I made my own!"
-            frameborder="0"
-            allowfullscreen>
-          </iframe>
-        </div>
-        <div class="video-info">
-          <h3>Nico Nextbots was DOWN! So I made my own!</h3>
-          <p>this was one of my best projects that had the biggest potential, it also grew my channel.</p>
-        </div>
-      </div>
-
-    </div>
-
+<!-- ============ SKILLS ============ -->
+<section id="skills">
+  <div class="section-head reveal">
+    <h2>Capability</h2>
+    <div class="section-tag">Stack</div>
   </div>
-
+  <ul class="skills-list">
+    <li class="reveal">Unity <span>Game development, C#, systems design</span></li>
+    <li class="reveal">After Effects <span>Motion graphics, video editing</span></li>
+    <li class="reveal">DaVinci Resolve <span>Editing, colour, delivery</span></li>
+    <li class="reveal">Blender <span>Shader / technical art — in progress</span></li>
+  </ul>
 </section>
 
-  <!-- JS -->
-  <script src="script.js"></script>
+<!-- ============ CONTACT ============ -->
+<section id="contact">
+  <div class="contact reveal">
+    <h2>Let's build something.</h2>
+    <a class="contact-link" id="magnetic-btn" href="mailto:hello@callumdev.com" data-email="hello@callumdev.com">
+      <span id="contact-btn-text">hello@callumdev.com →</span>
+    </a>
+    <div id="copy-toast" style="font-size:12px; color:var(--paper-dim); margin-top:10px; opacity:0; transition:opacity .3s;">Copied to clipboard</div>
+  </div>
+</section>
+
+<footer>
+  <div>© <span id="year"></span> Callum</div>
+  <div>Based in the UK</div>
+</footer>
+
+<script>
+/* ---------------- PROJECT DATA ----------------
+   Add new work by pushing an object into this array.
+   media: { type: 'video'|'image'|'none', src: 'url-or-path' }
+   size: 'wide' | 'tall' | '' (default half-width card)
+------------------------------------------------- */
+/* declared early — referenced inside renderGrid/updateParallax which run immediately below */
+const hoveredCards = new Set();
+
+const PROJECTS = [
+  {
+    title: "The Follower: Rewritten",
+    category: "games",
+    tagLabel: "Unity — Game",
+    size: "wide",
+    link: "#", // unverified — paste the real link
+    desc: "A rebuilt version of the original — polished into a full release rather than a rough challenge build.",
+    media: { type: "image", src: "images/follower-rewritten-cover.png" }
+  },
+  {
+    title: "Kicks — Final Main Animation",
+    category: "blender",
+    tagLabel: "Blender — Animation",
+    size: "wide",
+    desc: "Main animation piece — full render.",
+    media: { type: "video", src: "videos/kicks-final-main-animation.mp4" }
+  },
+  {
+    title: "Kicks — Intro",
+    category: "blender",
+    tagLabel: "Blender — Animation",
+    size: "",
+    desc: "Intro sequence for the Kicks project.",
+    media: { type: "video", src: "videos/kicks-final-intro.mp4" }
+  },
+  {
+    title: "Hard Hat — Character Select",
+    category: "blender",
+    tagLabel: "Blender — Character",
+    size: "",
+    desc: "Character select sequence, Hard Hat project.",
+    media: { type: "video", src: "videos/hard-hat-character-select.mp4" }
+  },
+  {
+    title: "Hard Hat — Short Animation Render",
+    category: "blender",
+    tagLabel: "Blender — Animation",
+    size: "tall",
+    desc: "Short-form render from the Hard Hat project.",
+    media: { type: "video", src: "videos/hard-hat-short-anim-render.mp4" }
+  }
+];
+
+function mediaBlock(p){
+  if(p.media.type === "video"){
+    return `<video src="${p.media.src}" muted loop playsinline preload="metadata"></video>`;
+  }
+  if(p.media.type === "image"){
+    return `<img src="${p.media.src}" alt="${p.title}">`;
+  }
+  return `<div class="media-placeholder">Drop media here<br>${p.title}</div>`;
+}
+
+function renderGrid(filter){
+  const grid = document.getElementById('work-grid');
+  grid.innerHTML = '';
+  PROJECTS.filter(p => filter === 'all' || p.category === filter).forEach((p, i) => {
+    const card = document.createElement('div');
+    card.className = `card reveal ${p.size}`;
+
+    card.innerHTML = `
+      <div class="card-media">
+        ${mediaBlock(p)}
+        <div class="halftone-overlay"></div>
+      </div>
+      <a href="${p.link || '#'}" target="_blank" rel="noopener" class="card-info-link" style="display:block; color:inherit;">
+        <div class="card-info" style="flex-direction:column; align-items:flex-start; gap:6px;">
+          <div style="display:flex; justify-content:space-between; width:100%;">
+            <h3>${p.title}</h3>
+            <span class="tag">${p.tagLabel}</span>
+          </div>
+          ${p.desc ? `<p style="font-size:13px; color:var(--paper-dim); line-height:1.4;">${p.desc}</p>` : ''}
+        </div>
+      </a>
+    `;
+
+    const vid = card.querySelector('video');
+    if(vid){
+      card.addEventListener('mouseenter', () => vid.play());
+      card.addEventListener('mouseleave', () => { vid.pause(); vid.currentTime = 0; });
+    }
+    card.addEventListener('mouseenter', () => { hoveredCards.add(card); updateParallax(); });
+    card.addEventListener('mouseleave', () => { hoveredCards.delete(card); updateParallax(); });
+
+    // 3D tilt — card responds to cursor position, not just a flat hover state
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const px = (e.clientX - rect.left) / rect.width - 0.5;
+      const py = (e.clientY - rect.top) / rect.height - 0.5;
+      card.style.transform = `perspective(900px) rotateX(${-py * 8}deg) rotateY(${px * 8}deg) translateY(-4px)`;
+    });
+    card.addEventListener('mouseleave', () => { card.style.transform = ''; });
+
+    grid.appendChild(card);
+  });
+  observeReveals();
+  updateParallax();
+}
+
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    renderGrid(btn.dataset.filter);
+  });
+});
+
+renderGrid('all');
+
+/* ---------------- SCROLL REVEAL ---------------- */
+function observeReveals(){
+  const els = document.querySelectorAll('.reveal:not(.in)');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if(e.isIntersecting){
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  els.forEach(el => io.observe(el));
+}
+observeReveals();
+
+document.getElementById('year').textContent = new Date().getFullYear();
+
+/* ---------------- SITE-WIDE CURSOR GLOW ---------------- */
+const glow = document.getElementById('cursor-glow');
+let glowActive = false;
+window.addEventListener('mousemove', (e) => {
+  glow.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
+  if(!glowActive){ glow.classList.add('active'); glowActive = true; }
+});
+window.addEventListener('mouseleave', () => { glow.classList.remove('active'); glowActive = false; });
+
+/* ---------------- CUSTOM CURSOR ---------------- */
+const cursor = document.getElementById('custom-cursor');
+window.addEventListener('mousemove', (e) => {
+  cursor.style.left = e.clientX + 'px';
+  cursor.style.top = e.clientY + 'px';
+});
+document.addEventListener('mouseover', (e) => {
+  if(e.target.closest('a, button, .card, .filter-btn')) cursor.classList.add('hover');
+});
+document.addEventListener('mouseout', (e) => {
+  if(e.target.closest('a, button, .card, .filter-btn')) cursor.classList.remove('hover');
+});
+
+/* ---------------- MAGNETIC CONTACT BUTTON ---------------- */
+const magnetBtn = document.getElementById('magnetic-btn');
+if(magnetBtn){
+  magnetBtn.addEventListener('mousemove', (e) => {
+    const rect = magnetBtn.getBoundingClientRect();
+    const x = (e.clientX - rect.left - rect.width/2) * 0.35;
+    const y = (e.clientY - rect.top - rect.height/2) * 0.35;
+    magnetBtn.style.transform = `translate(${x}px, ${y}px)`;
+  });
+  magnetBtn.addEventListener('mouseleave', () => { magnetBtn.style.transform = ''; });
+  magnetBtn.style.transition = 'transform .2s ease-out';
+
+  // mailto: only works if the OS has a default mail client configured,
+  // and navigator.clipboard requires a secure context (https, not file://).
+  // This covers both cases so the button always does something visible.
+  magnetBtn.addEventListener('click', (e) => {
+    const email = magnetBtn.dataset.email;
+    const toast = document.getElementById('copy-toast');
+
+    function showToast(msg){
+      toast.textContent = msg;
+      toast.style.opacity = '1';
+      setTimeout(() => { toast.style.opacity = '0'; }, 2000);
+    }
+
+    if(navigator.clipboard && window.isSecureContext){
+      navigator.clipboard.writeText(email).then(() => showToast('Copied to clipboard'))
+        .catch(() => fallbackCopy());
+    } else {
+      fallbackCopy();
+    }
+
+    function fallbackCopy(){
+      const ta = document.createElement('textarea');
+      ta.value = email;
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      try {
+        document.execCommand('copy');
+        showToast('Copied to clipboard');
+      } catch(err){
+        showToast('Email: ' + email);
+      }
+      document.body.removeChild(ta);
+    }
+    // mailto: still fires natively via href — this doesn't block it,
+    // it just guarantees the email is usable even if no mail app opens.
+  });
+}
+
+/* ---------------- SCROLL-LINKED ACCENT HEAT ----------------
+   Drives --scroll-heat 0→1 across full page height. Used to push
+   the duotone system harder as you move deeper into the site —
+   the "experience" layer instead of a static hero-only effect. */
+function updateScrollHeat(){
+  const scrolled = window.scrollY;
+  const max = document.body.scrollHeight - window.innerHeight;
+  const heat = max > 0 ? Math.min(scrolled / max, 1) : 0;
+  document.body.style.setProperty('--scroll-heat', heat.toFixed(3));
+  glow.style.width = (900 + heat * 300) + 'px';
+  glow.style.height = (900 + heat * 300) + 'px';
+  glow.style.marginLeft = -(450 + heat * 150) + 'px';
+  glow.style.marginTop = -(450 + heat * 150) + 'px';
+}
+window.addEventListener('scroll', updateScrollHeat, { passive:true });
+updateScrollHeat();
+
+/* ---------------- PARALLAX + HOVER ZOOM (unified transform) ----------------
+   Both effects write to the same `transform` property, so they're combined
+   here in one place instead of letting a CSS :hover rule and a JS scroll
+   listener silently overwrite each other. hoveredCards is declared near the
+   top of this script, before renderGrid runs. */
+function updateParallax(){
+  document.querySelectorAll('.card').forEach(card => {
+    const media = card.querySelector('.card-media');
+    const child = media && media.querySelector('video, img');
+    if(!child) return;
+    const rect = media.getBoundingClientRect();
+    const centerOffset = (rect.top + rect.height/2 - window.innerHeight/2) / window.innerHeight;
+    const scale = hoveredCards.has(card) ? 1.08 : 1.02;
+    child.style.transform = `translateY(${centerOffset * 24}px) scale(${scale})`;
+  });
+}
+window.addEventListener('scroll', updateParallax, { passive:true });
+window.addEventListener('resize', updateParallax);
+
+/* ---------------- HALFTONE HERO CANVAS ----------------
+   Animated dot-grid that reacts subtly to cursor position —
+   direct visual reference to the halftone shader work itself.
+-------------------------------------------------------- */
+const canvas = document.getElementById('halftone-canvas');
+const ctx = canvas.getContext('2d');
+let W, H, mouse = { x: -9999, y: -9999 };
+
+function resize(){
+  W = canvas.width = canvas.offsetWidth * devicePixelRatio;
+  H = canvas.height = canvas.offsetHeight * devicePixelRatio;
+}
+resize();
+window.addEventListener('resize', resize);
+window.addEventListener('mousemove', (e) => {
+  const rect = canvas.getBoundingClientRect();
+  mouse.x = (e.clientX - rect.left) * devicePixelRatio;
+  mouse.y = (e.clientY - rect.top) * devicePixelRatio;
+});
+window.addEventListener('mouseleave', () => { mouse.x = -9999; mouse.y = -9999; });
+
+const SPACING = 26 * devicePixelRatio;
+let t = 0;
+
+function draw(){
+  t += 0.006;
+  ctx.clearRect(0, 0, W, H);
+  const cols = Math.ceil(W / SPACING) + 1;
+  const rows = Math.ceil(H / SPACING) + 1;
+
+  for(let iy = 0; iy < rows; iy++){
+    for(let ix = 0; ix < cols; ix++){
+      const x = ix * SPACING;
+      const y = iy * SPACING;
+
+      // base ambient wave
+      const wave = Math.sin(x * 0.01 + t * 2) * Math.cos(y * 0.01 + t * 1.4);
+      let radius = (wave * 0.5 + 0.5) * (SPACING * 0.36);
+
+      // cursor proximity boost
+      const dx = x - mouse.x, dy = y - mouse.y;
+      const dist = Math.sqrt(dx*dx + dy*dy);
+      const influence = Math.max(0, 1 - dist / (SPACING * 7));
+      radius += influence * SPACING * 0.5;
+      radius = Math.min(radius, SPACING * 0.46);
+
+      if(radius < 0.6) continue;
+
+      // duotone print-misregistration effect near cursor
+      if(influence > 0.05){
+        ctx.beginPath();
+        ctx.fillStyle = 'rgba(63,214,224,' + (0.5*influence) + ')'; // cyan plate
+        ctx.arc(x - influence*3, y, radius, 0, Math.PI*2);
+        ctx.fill();
+        ctx.beginPath();
+        ctx.fillStyle = 'rgba(255,63,110,' + (0.5*influence) + ')'; // magenta plate
+        ctx.arc(x + influence*3, y, radius, 0, Math.PI*2);
+        ctx.fill();
+      }
+
+      ctx.beginPath();
+      ctx.fillStyle = 'rgba(238,236,228,' + (0.16 + influence*0.5) + ')';
+      ctx.arc(x, y, radius, 0, Math.PI*2);
+      ctx.fill();
+    }
+  }
+  requestAnimationFrame(draw);
+}
+draw();
+</script>
 </body>
 </html>
-
-
